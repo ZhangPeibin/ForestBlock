@@ -34,15 +34,15 @@ module.exports = {
       },
       {
         scaffoldEthDark: {
-          primary: "#212638",
-          "primary-content": "#F9FBFF",
-          secondary: "#323f61",
-          "secondary-content": "#F9FBFF",
+          primary: "#333333",
+          "primary-content": "#F9FBFF",//字体颜色
+          secondary: "#323f61",//按钮颜色
+          "secondary-content": "#F9FBFF",// 按钮的字体颜色
           accent: "#4969A6",
           "accent-content": "#F9FBFF",
           neutral: "#F9FBFF",
           "neutral-content": "#385183",
-          "base-100": "#385183",
+          "base-100": "#666652",//333333//666652
           "base-200": "#2A3655",
           "base-300": "#212638",
           "base-content": "#F9FBFF",
