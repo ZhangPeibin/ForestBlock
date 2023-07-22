@@ -1,7 +1,9 @@
 import Link from "next/link";
 import type { NextPage } from "next";
-import { BugAntIcon, MagnifyingGlassIcon, SparklesIcon } from "@heroicons/react/24/outline";
 import { MetaHeader } from "~~/components/MetaHeader";
+import { Canvas, useFrame } from "@react-three/fiber";
+import Box from "~~/components/r3f/Box";
+
 
 const Home: NextPage = () => {
   return (
@@ -27,6 +29,18 @@ const Home: NextPage = () => {
                   Mogao Caves Oasis（莫高窟绿洲）
                 </Link>
               </p>
+              <Canvas
+                   shadows
+                   style={{width:300,height:300,background:"#ffffff"}}
+                  
+                   camera={{
+                    position:[-6,7,7]
+                   }}>
+                     <ambientLight />
+                    <pointLight position={[10, 10, 10]} />
+                    <Box position={[-1.2, 0, 0]} />
+                    <Box position={[1.2, 0, 0]} />
+                </Canvas>
             </div>
 
             <div style={{ height: 300 }} className="flex flex-col bg-base-300 px-10 py-10 text-center items-center max-w-xs aspect-square">
