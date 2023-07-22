@@ -9,49 +9,65 @@ const Home: NextPage = () => {
       <MetaHeader />
       <div className="flex items-center flex-col flex-grow pt-10 bg-base-100">
         <div className="px-5" >
-          <h1 className="text-center mb-8 ">
+          <h1 className="text-center  ">
             <span className="block text-2xl mb-2">Welcome to</span>
             <span className="block text-4xl font-bold">🌴🌳🌲</span>
           </h1>
           <p className="text-center text-lg">
-            Get started by editing{" "}
-            <code className="italic bg-base-100 text-base font-bold">packages/nextjs/pages/index.tsx</code>
-          </p>
-          <p className="text-center text-lg">
-            Edit your smart contract <code className="italic bg-base-100 text-base font-bold">YourContract.sol</code> in{" "}
-            <code className="italic bg-base-100 text-base font-bold">packages/hardhat/contracts</code>
+            Plant a tree in the blockchain and own a tree in the real world
           </p>
         </div>
 
-        <div className="flex-grow bg-base-100 w-full mt-16 px-8 py-12">
-          <div className="flex justify-center items-center gap-12 flex-col sm:flex-row">
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <BugAntIcon className="h-8 w-8 fill-secondary" />
+        <div className="flex-grow bg-base-100 w-full px-8 py-12">
+          <div className="flex justify-center items-center gap-12 flex-col sm:flex-row mb-8">
+            
+            <div style={{ height: 300 }} className="flex flex-col bg-base-300 px-10 py-10 text-center items-center max-w-xs aspect-square">
               <p>
-                Tinker with your smart contract using the{" "}
-                <Link href="/debug" passHref className="link">
-                  Debug Contract
-                </Link>{" "}
+                <Link href="/example-ui" passHref className="link">
+                  Mogao Caves Oasis（莫高窟绿洲）
+                </Link>
+              </p>
+            </div>
+
+            <div style={{ height: 300 }} className="flex flex-col bg-base-300 px-10 py-10 text-center items-center max-w-xs aspect-square">
+              <p>
+                <Link href="/example-ui" passHref className="link">
+                  Yosemite National Park（约塞米蒂国家公园）
+                </Link>
+              </p>
+            </div>
+            <div style={{ height: 300 }} className="flex flex-col bg-base-300 px-10 py-10 text-center items-center max-w-xs aspect-square">
+              <p>
+                <Link href="/blockexplorer" passHref className="link">
+                  Black Forest（黑森林)
+                </Link>
                 tab.
               </p>
             </div>
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <SparklesIcon className="h-8 w-8 fill-secondary" />
+          </div>
+
+
+
+          <div className="flex justify-center items-center gap-12 flex-col sm:flex-row mt-8">
+            <div style={{ height: 300 }} className="flex flex-col bg-base-300 px-10 py-10 text-center items-center max-w-xs aspect-square">
               <p>
-                Experiment with{" "}
                 <Link href="/example-ui" passHref className="link">
-                  Example UI
-                </Link>{" "}
-                to build your own UI.
+                  Borneo Rainforest（婆罗洲雨林）
+                </Link>
               </p>
             </div>
-            <div className="flex flex-col bg-base-100 px-10 py-10 text-center items-center max-w-xs rounded-3xl">
-              <MagnifyingGlassIcon className="h-8 w-8 fill-secondary" />
+            <div style={{ height: 300 }} className="flex flex-col bg-base-300 px-10 py-10 text-center items-center max-w-xs aspect-square">
               <p>
-                Explore your local transactions with the{" "}
+                <Link href="/example-ui" passHref className="link">
+                  Taiga Forest（针叶林区）
+                </Link>
+              </p>
+            </div>
+            <div style={{ height: 300 }} className="flex flex-col bg-base-300 px-10 py-10 text-center items-center max-w-xs aspect-square">
+              <p>
                 <Link href="/blockexplorer" passHref className="link">
-                  Block Explorer
-                </Link>{" "}
+                  Great Barrier Reef（大堡礁）
+                </Link>
                 tab.
               </p>
             </div>

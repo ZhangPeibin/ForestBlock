@@ -113,5 +113,5 @@ module.exports = {
         zoom: "zoom 1s ease infinite",
       },
     },
-  },
+  },  
 };

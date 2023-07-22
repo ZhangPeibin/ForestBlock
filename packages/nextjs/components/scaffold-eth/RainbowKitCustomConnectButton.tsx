@@ -61,7 +61,7 @@ export const RainbowKitCustomConnectButton = () => {
               }
 
               return (
-                <div className="px-2 flex justify-end items-center">
+                <div className="px-2 flex justify-end items-center ">
                   <div className="flex justify-center items-center border-1 rounded-lg">
                     <div className="flex flex-col items-center mr-1">
                       <Balance address={account.address} className="min-h-0 h-auto" />
@@ -72,9 +72,9 @@ export const RainbowKitCustomConnectButton = () => {
                     <button
                       onClick={openAccountModal}
                       type="button"
-                      className="btn btn-secondary btn-sm pl-0 pr-2 shadow-md"
+                      className="btn btn-primary btn-sm pl-0 pr-2 shadow-md"
                     >
-                      <BlockieAvatar address={account.address} size={24} ensImage={account.ensAvatar} />
+                      {/* <BlockieAvatar address={account.address} size={24} ensImage={account.ensAvatar} /> */}
                       <span className="ml-2 mr-1">{account.displayName}</span>
                       <span>
                         <ChevronDownIcon className="h-6 w-4" />
