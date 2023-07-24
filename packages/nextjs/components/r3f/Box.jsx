@@ -11,11 +11,12 @@ function Box(props) {
     <mesh
       {...props}
       ref={meshRef}
+      // rotation={[90, 0, 20]}
       scale={active ? 1.5 : 1}
       onClick={(event) => setActive(!active)}
       onPointerOver={(event) => setHover(true)}
       onPointerOut={(event) => setHover(false)}>
-      <boxGeometry args={[1, 1, 1]} />
+      <boxGeometry args={[1, 1, 1]} /> // 将这个box集合形态设置 宽度，高度，深度
       <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
     </mesh>
   )

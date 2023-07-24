@@ -20,72 +20,23 @@ const Home: NextPage = () => {
           </p>
         </div>
 
-        <div className="flex-grow bg-base-100 w-full px-8 py-12">
-          <div className="flex justify-center items-center gap-12 flex-col sm:flex-row mb-8">
-            
-            <div style={{ height: 300 }} className="flex flex-col bg-base-300 px-10 py-10 text-center items-center max-w-xs aspect-square">
-              <p>
-                <Link href="/example-ui" passHref className="link">
-                  Mogao Caves Oasis（莫高窟绿洲）
-                </Link>
-              </p>
-              <Canvas
+        <div className="flex-grow bg-base-100 w-full">
+          <div className="flex justify-center items-center  bg-base-100 flex-col sm:flex-row mb-8">
+          <Canvas
                    shadows
-                   style={{width:300,height:300,background:"#ffffff"}}
-                  
+                   style={{height:400}}
                    camera={{
                     position:[-6,7,7]
                    }}>
-                     <ambientLight />
-                    <pointLight position={[10, 10, 10]} />
-                    <Box position={[-1.2, 0, 0]} />
-                    <Box position={[1.2, 0, 0]} />
+                    //该光全局均匀地照亮场景中的所有对象。
+                    <ambientLight /> //不加光源，几何体就是黑色的
+                    <pointLight color="white" intensity={2} position={[10, 10, 10]} />
+                    <Box position={[0, 3, 0]} />
+                    <gridHelper  rotation={[0, -1, 0]} args={[210, 210, 0x535353, 0x535353]} />
+
                 </Canvas>
-            </div>
-
-            <div style={{ height: 300 }} className="flex flex-col bg-base-300 px-10 py-10 text-center items-center max-w-xs aspect-square">
-              <p>
-                <Link href="/example-ui" passHref className="link">
-                  Yosemite National Park（约塞米蒂国家公园）
-                </Link>
-              </p>
-            </div>
-            <div style={{ height: 300 }} className="flex flex-col bg-base-300 px-10 py-10 text-center items-center max-w-xs aspect-square">
-              <p>
-                <Link href="/blockexplorer" passHref className="link">
-                  Black Forest（黑森林)
-                </Link>
-                tab.
-              </p>
-            </div>
           </div>
 
-
-
-          <div className="flex justify-center items-center gap-12 flex-col sm:flex-row mt-8">
-            <div style={{ height: 300 }} className="flex flex-col bg-base-300 px-10 py-10 text-center items-center max-w-xs aspect-square">
-              <p>
-                <Link href="/example-ui" passHref className="link">
-                  Borneo Rainforest（婆罗洲雨林）
-                </Link>
-              </p>
-            </div>
-            <div style={{ height: 300 }} className="flex flex-col bg-base-300 px-10 py-10 text-center items-center max-w-xs aspect-square">
-              <p>
-                <Link href="/example-ui" passHref className="link">
-                  Taiga Forest（针叶林区）
-                </Link>
-              </p>
-            </div>
-            <div style={{ height: 300 }} className="flex flex-col bg-base-300 px-10 py-10 text-center items-center max-w-xs aspect-square">
-              <p>
-                <Link href="/blockexplorer" passHref className="link">
-                  Great Barrier Reef（大堡礁）
-                </Link>
-                tab.
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </>
