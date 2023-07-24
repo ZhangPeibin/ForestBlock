@@ -22,17 +22,20 @@ const Home: NextPage = () => {
 
         <div className="flex-grow bg-base-100 w-full">
           <div className="flex justify-center items-center  bg-base-100 flex-col sm:flex-row mb-8">
-          <Canvas
+                <Canvas
                    shadows
-                   style={{height:400}}
+                   style={{height:330}}
                    camera={{
                     position:[-6,7,7]
                    }}>
                     //该光全局均匀地照亮场景中的所有对象。
                     <ambientLight /> //不加光源，几何体就是黑色的
                     <pointLight color="white" intensity={2} position={[10, 10, 10]} />
-                    <Box position={[0, 3, 0]} />
-                    <gridHelper  rotation={[0, -1, 0]} args={[210, 210, 0x535353, 0x535353]} />
+                    <Box position={[0, 4, 0]} />
+                    //0x535353
+                    // 0x4c443b
+                    //0x626c70
+                    <gridHelper  rotation={[0, -1, 0]} args={[210, 210, 0x4c443b, 0x4c443b]} />
 
                 </Canvas>
           </div>
