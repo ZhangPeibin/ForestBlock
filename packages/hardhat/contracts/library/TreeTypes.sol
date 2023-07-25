@@ -3,12 +3,14 @@
 pragma solidity ^0.8.16;
 
 /**
+ * 
+ * @notice  Species 树种的意思，树的种类
  * 定义涉及Tree的各种数据结构
  * 种子
  * 树
  * @author peibin
  */
-library TreeType {
+library TreeTypes{
 
     /**
      * 
@@ -31,10 +33,10 @@ library TreeType {
 
 
     /**
-     * 所有种子的类型
+     * 树的品种
      */
-    struct SeedType {
-        string types;
+    struct Species {
+        string specie;
     }
 }  
 
