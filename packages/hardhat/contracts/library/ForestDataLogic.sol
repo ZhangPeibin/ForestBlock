@@ -4,7 +4,7 @@ pragma solidity ^0.8.16;
 import { TreeTypes } from "./TreeTypes.sol";
 
 contract ForestDataLogic {
-	mapping(TreeTypes.Species => string) speciesUrls;
+	 mapping(TreeTypes.Species => string) public speciesUrls;
 
 	/**
 	 * init species url
@@ -37,6 +37,12 @@ contract ForestDataLogic {
 			TreeTypes.Species.QuercusPalustris
 		] = "https://en.wikipedia.org/wiki/Quercus_palustris";
 	}
+
+	 function getSpeciesUrl(TreeTypes.Species specie) external view  returns (string memory url)  {
+          string memory v = speciesUrls[specie];
+          return v;
+    }
+
 
 
     
