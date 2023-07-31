@@ -11,7 +11,6 @@ export const SwitchTheme = ({ className }: { className?: string }) => {
     body.setAttribute("data-theme", isDarkMode ? "scaffoldEthDark" : "scaffoldEth");
   }, [isDarkMode]);
 
-
   return (
     <div className={`flex space-x-2 text-sm ${className}`}>
       <input

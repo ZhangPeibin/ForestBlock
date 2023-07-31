@@ -1,22 +1,19 @@
-import React from "react";
-import {useFrame } from "@react-three/fiber";
-import { useRef, useState } from "react";
+import { useRef, useState ,React } from "react";
 
 function Box(props) {
-  const meshRef = useRef(null)
-  const [hovered, setHover] = useState(false)
-  const [active, setActive] = useState(false)
-  useFrame((state, delta) => (meshRef.current.rotation.x += 0.01))
+  const meshRef = useRef(null);
+  const [hovered, setHover] = useState(false);
+  const [active, setActive] = useState(false);
   return (
     <mesh
       {...props}
       ref={meshRef}
       // rotation={[90, 0, 20]}
       scale={active ? 1.5 : 1}
-      onClick={(event) => setActive(!active)}
-      onPointerOver={(event) => setHover(true)}
-      onPointerOut={(event) => setHover(false)}>
-      <boxGeometry args={[1, 1, 1]} /> // 将这个box集合形态设置 宽度，高度，深度
+      onClick={() => setActive(!active)}
+      onPointerOver={() => setHover(true)}
+      onPointerOut={() => setHover(false)}>
+      <boxGeometry args={[1, 1, 1]} /> 
       <meshStandardMaterial color={hovered ? 'hotpink' : 'orange'} />
     </mesh>
   )

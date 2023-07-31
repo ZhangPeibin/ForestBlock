@@ -1,11 +1,10 @@
 import type { NextPage } from "next";
+import "svg-pan-zoom-container"
 import { MetaHeader } from "~~/components/MetaHeader";
 import { ContractData } from "~~/components/example-ui/ContractData";
 import { ContractInteraction } from "~~/components/example-ui/ContractInteraction";
-import "svg-pan-zoom-container"
+
 const ExampleUI: NextPage = () => {
-
-
   const svgEles = [];
 
   for (let i = 0; i <= 100; i++) {
@@ -31,7 +30,7 @@ const ExampleUI: NextPage = () => {
   )
 
   svgEles.push(
-    <image x="10.25" y="10.25" href="https://euc.li/loveyourfamily.eth" width="9.5" height="9.5" preserveAspectRatio="xMinYMin slice" opacity={1}></image>
+    <image x="10.25" y="10.25" href="https://stardewvalleywiki.com/mediawiki/images/4/4b/Daffodil.png" width="9.5" height="9.5" preserveAspectRatio="xMinYMin slice" opacity={1}></image>
   )
 
   return (

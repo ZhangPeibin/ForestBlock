@@ -1,21 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import type { AppProps } from "next/app";
-import { RainbowKitProvider, darkTheme } from "@rainbow-me/rainbowkit";
+import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import "@rainbow-me/rainbowkit/styles.css";
 import NextNProgress from "nextjs-progressbar";
 import { Toaster } from "react-hot-toast";
 import { WagmiConfig } from "wagmi";
-import { Footer } from "~~/components/Footer";
 import { Header } from "~~/components/Header";
 import { BlockieAvatar } from "~~/components/scaffold-eth";
 import { useNativeCurrencyPrice } from "~~/hooks/scaffold-eth";
 import { useGlobalState } from "~~/services/store/store";
 import { wagmiConfig } from "~~/services/web3/wagmiConfig";
 import { appChains } from "~~/services/web3/wagmiConnectors";
-import { useDarkMode } from "usehooks-ts";
-
 import "~~/styles/globals.css";
-
 
 const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
   const price = useNativeCurrencyPrice();
@@ -25,7 +21,7 @@ const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
     const body = document.body;
     body.setAttribute("data-theme", "scaffoldEthDark");
-  }, [true]);
+  });
 
   useEffect(() => {
     if (price > 0) {
@@ -33,31 +29,15 @@ const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
     }
   }, [setNativeCurrencyPrice, price]);
 
-
   return (
     <WagmiConfig config={wagmiConfig}>
       <NextNProgress />
-      <RainbowKitProvider
-        chains={appChains.chains}
-        avatar={BlockieAvatar}
-        // theme={darkTheme({
-        //   accentColor: '#000000',
-        //   accentColorForeground: 'black',
-        //   borderRadius: 'small',
-        //   fontStack: 'system',
-        //   overlayBlur: 'none',
-        // })}
-      >
+      <RainbowKitProvider chains={appChains.chains} avatar={BlockieAvatar}>
         <div className="flex flex-col min-h-screen">
-          
           <main className="relative flex flex-col flex-1">
-          <Header />
+            <Header />
             <Component {...pageProps} />
-            
           </main>
-          
-          {/* <Footer /> */}
-
         </div>
         <Toaster />
       </RainbowKitProvider>
@@ -66,5 +46,3 @@ const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
 };
 
 export default ScaffoldEthApp;
-
-
