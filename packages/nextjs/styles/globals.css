@@ -23,10 +23,26 @@ p {
   margin: 1rem 0;
 }
 
+
 .btn {
   @apply shadow-md;
 }
 
 .btn.btn-ghost {
   @apply shadow-none;
+}
+
+
+#viewport{
+  transform: matrix(0.571831, 0, 0, 0.571831, 104.085, 0);
+}
+
+#grid{
+  overflow:hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  width: calc(100vw-500px);
+  height: 100vh;  
 }
