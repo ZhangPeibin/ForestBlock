@@ -1,11 +1,14 @@
-import Link from "next/link";
 import type { NextPage } from "next";
 import { MetaHeader } from "~~/components/MetaHeader";
-import { Canvas, useFrame } from "@react-three/fiber";
-import Box from "~~/components/r3f/Box";
+import { Canvas, useFrame, } from "@react-three/fiber";
 
+import Box from "~~/components/r3f/Box";
+import GIF from "~~/components/GIF";
+import DynamicGIF from "~~/components/DynamicGIF";
+import DynamicGIFComponent from "~~/components/DynamicGIF";
 
 const Home: NextPage = () => {
+
   return (
     <>
       <MetaHeader />
@@ -21,6 +24,7 @@ const Home: NextPage = () => {
         </div>
 
         <div className="flex-grow bg-base-100 w-full">
+
           <div className="flex justify-center items-center  bg-base-100 flex-col sm:flex-row mb-8">
             <Canvas
               shadows
@@ -30,8 +34,8 @@ const Home: NextPage = () => {
 
               <ambientLight >{/*该光全局均匀地照亮场景中的所有对象。不加光源，几何体就是黑色的*/}</ambientLight>
               <pointLight color="white" intensity={2} position={[10, 10, 10]} />
-              <Box position={[0, 4, 0]} />
-
+              {/* <Box position={[0, 4, 0]} /> */}
+              {/* <Tree position={[0, 4, 0]} /> */}
               <gridHelper rotation={[0, -1, 0]} args={[210, 210, 0x4c443b, 0x4c443b]} >
                 { /* 0x535353  0x4c443b  0x626c70 */}
               </gridHelper>
@@ -39,7 +43,11 @@ const Home: NextPage = () => {
             </Canvas>
           </div>
 
+          <DynamicGIFComponent/>
+          
         </div>
+
+
       </div>
     </>
   );
