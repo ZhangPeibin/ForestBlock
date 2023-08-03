@@ -1,5 +1,5 @@
 import React from "react";
-import { Stage, Layer, Image } from "react-konva";
+import {Image } from "react-konva";
 import "gifler";
 
 
@@ -18,7 +18,9 @@ const GIF = ({ src }) => {
         anim.animateInCanvas(canvas);
         anim.onDrawFrame = (ctx, frame) => {
           ctx.drawImage(frame.buffer, frame.x, frame.y);
-          imageRef.current.getLayer().draw();
+          if(imageRef.current != undefined){
+            imageRef.current.getLayer().draw();
+          }
         };
       });
       if(anim != undefined)
