@@ -7,6 +7,16 @@
   background: hsl(var(--b3));
 }
 
+@font-face {
+  font-family: grapenuts;
+  src: url(/assets/fonts/test.woff2);
+}
+
+html{
+  font-family: grapenuts;
+
+}
+
 body {
   min-height: 100vh;
 }
