@@ -21,4 +21,12 @@ contract ForestHub is Ownable {
     }
 
 
+    /**
+     * 种下一颗种子 
+     */
+    function sowSeeds() external view {
+        
+    }
+
+
 }

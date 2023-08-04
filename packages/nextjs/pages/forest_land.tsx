@@ -40,8 +40,6 @@ const ExampleUI: NextPage = () => {
         description=""
       >
         {/* We are importing the font this way to lighten the size of SE2. */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree&display=swap" rel="stylesheet" />
       </MetaHeader>
       <div className="bg-base-100 w-screen h-screen block ">
         {/* <ContractInteraction /> */}
@@ -64,20 +62,20 @@ const ExampleUI: NextPage = () => {
           </svg>
         </div>
 
-        <div style={{
+        {/* <div style={{
           width: "500px",
           height:"100vh",
           position: "fixed",
-          top: "0",
-          // bottom: "0",
+          top: "0px",
+          bottom: "0",
           right: "0",
           overflow: "hidden",
-          overflowY: "scroll",
+          overflowY: "hidden",
           padding:"30px",
           background: "#161923"
         }}>
 
-        </div>
+        </div> */}
 
       </div>
     </>
