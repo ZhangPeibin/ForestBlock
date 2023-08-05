@@ -2,7 +2,7 @@
 import { Stage, Layer } from 'react-konva';
 import GIF from './GIF';
 
-function TreeGIFCanvas(props) {
+function TreeGIFCanvas(props:any) {
   return (
     <Stage width={props.width} height={props.height}>
       <Layer>

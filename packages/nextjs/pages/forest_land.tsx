@@ -1,8 +1,6 @@
 import type { NextPage } from "next";
 import "svg-pan-zoom-container"
 import { MetaHeader } from "~~/components/MetaHeader";
-import { ContractData } from "~~/components/example-ui/ContractData";
-import { ContractInteraction } from "~~/components/example-ui/ContractInteraction";
 
 const ExampleUI: NextPage = () => {
   const svgEles = [];
@@ -42,9 +40,6 @@ const ExampleUI: NextPage = () => {
         {/* We are importing the font this way to lighten the size of SE2. */}
       </MetaHeader>
       <div className="bg-base-100 w-screen h-screen block ">
-        {/* <ContractInteraction /> */}
-        {/* <ContractData /> */}
-
         <div
           className="block"
           data-zoom-on-wheel="zoom-amount: 0.01; min-scale: 0.5; max-scale: 100;"

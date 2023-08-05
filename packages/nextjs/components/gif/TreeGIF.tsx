@@ -6,7 +6,7 @@ const TreeGIF = dynamic(() => import('./TreeGIFCanvas'), {
   ssr: false,
 });
 
-function TreeGIFCaller({src,width,height}){
+function TreeGIFCaller({src,width,height}:{src:string,width:number,height:number}){
   return <TreeGIF src={src} width={width} height={height} />;
 }
 

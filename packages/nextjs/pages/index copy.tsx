@@ -10,7 +10,9 @@ CameraControls.install({ THREE })
 function Controls({ pos = new THREE.Vector3(0, 0, 0), look = new THREE.Vector3(0, 0, 0) }) {
   const camera = useThree((state) => state.camera)
   const gl = useThree((state) => state.gl)
-  const controls = useMemo(() => new CameraControls(camera, gl.domElement), [])
+  const controls = useMemo(() => {
+        return new CameraControls(camera, gl.domElement)
+    }, [camera,gl])
   return useFrame((state, delta) => {
     controls.setLookAt(state.camera.position.x, state.camera.position.y, state.camera.position.z, 0, 0, 0, true)
     return controls.update(delta)
@@ -18,7 +20,7 @@ function Controls({ pos = new THREE.Vector3(0, 0, 0), look = new THREE.Vector3(0
 }
 
 const MyGrid = () => {
-  const ref = useRef(null)
+  const ref = useRef<any>(null)
 
   useFrame(() => {
     if (ref.current) {
