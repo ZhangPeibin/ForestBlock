@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
-import "svg-pan-zoom-container"
 import { MetaHeader } from "~~/components/MetaHeader";
+// import "svg-pan-zoom-container"
 
-const ExampleUI: NextPage = () => {
+const Lands: NextPage = () => {
+
   const svgEles = [];
 
   for (let i = 0; i <= 100; i++) {
@@ -40,22 +41,24 @@ const ExampleUI: NextPage = () => {
         {/* We are importing the font this way to lighten the size of SE2. */}
       </MetaHeader>
       <div className="bg-base-100 w-screen h-screen block ">
-        <div
-          className="block"
-          data-zoom-on-wheel="zoom-amount: 0.01; min-scale: 0.5; max-scale: 100;"
-          data-pan-on-drag="true">
-          <svg xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
-            id="grid"
-          >
-            <g id="viewport"
-              transform="matrix(0.571830985915493,0,0,0.571830985915493,104.0845070422535,0)"
-              className="svg-pan-zoom_viewport"
+       
+          <div
+            className="block"
+            data-zoom-on-wheel="zoom-amount: 0.01; min-scale: 0.5; max-scale: 100;"
+            data-pan-on-drag="true">
+            <svg xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+              id="grid"
             >
-              {svgEles}
-            </g>
-          </svg>
-        </div>
+              <g id="viewport"
+                transform="matrix(0.571830985915493,0,0,0.571830985915493,104.0845070422535,0)"
+                className="svg-pan-zoom_viewport"
+              >
+                {svgEles}
+              </g>
+            </svg>
+          </div>
+
 
         {/* <div style={{
           width: "500px",
@@ -77,4 +80,4 @@ const ExampleUI: NextPage = () => {
   );
 };
 
-export default ExampleUI;
+export default Lands;

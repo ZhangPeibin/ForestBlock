@@ -40,7 +40,7 @@ export const Header = () => {
         <NavLink href="/">Home</NavLink>
       </li>
       <li>
-        <NavLink href="/forest_land">
+        <NavLink href="/lands">
           Lands
         </NavLink>
       </li>
