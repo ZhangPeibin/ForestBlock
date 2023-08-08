@@ -43,15 +43,9 @@ contract ForestDataLogic {
           return v;
     }
 
-
-
-    
-
-
     function  getSpeciesUrlS() internal view returns(mapping(TreeTypes.Species => string) storage data ){
         return speciesUrls;
     }
-
 
     
 

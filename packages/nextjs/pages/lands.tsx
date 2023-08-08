@@ -35,7 +35,7 @@ const Lands: NextPage = () => {
   return (
     <>
       <MetaHeader
-        title="ForstBlock | Lands"
+        title="ForestBlock | Lands"
         description=""
       >
         {/* We are importing the font this way to lighten the size of SE2. */}

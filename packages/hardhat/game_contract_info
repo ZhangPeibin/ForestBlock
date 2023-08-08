@@ -1,0 +1,30 @@
+
+1: 角色
+		-- admin 管理员 (设置ceo 设置cfo)
+		-- ceo (增加土地，增加树的种类 ,扩展土地 等等 )
+		-- cfo (提取资金)
+
+		-- 3种角色都能 暂停game
+		-- 只有 admin能重启game
+
+
+2: 合约层级
+    -- ForestAccessControl
+    ------ForestBase    森林基础合约 
+    ------ForestSpecies   森林物种合约 (初始化森林物种信息，增加新物种，禁止某个物种继续种植)
+
+
+
+
+
+    library
+    	--Constants.sol  所有的常量
+    	--Events.sol  所有的event事件
+    	--TreeTypes.sol  ？  todo : move spec to  ForestSpec.sol 
+    	--ForestDataLogic.sol  森林物种  todo : change to  ForestSpecies.sol 
+
+
+
+
+
+
