@@ -38,35 +38,22 @@ const Home: NextPage = () => {
 
   const [zoom, setZoom] = useState(false)
 
-
-  const styles: any = {
-    position: "fixed",
-    top: "48%",
-    left: "50%",
-    overflow: "hidden",
-    transform: `translate(-50%, -50%)`,
-  };
-
   const textStyle: any = {
     position: "fixed",
-    top: "20%",
+    top: "30%",
     left: "50%",
-    overflow: "hidden",
     transform: `translate(-50%, -50%)`,
+    pointerEvents: 'none'
   };
 
   const canvasDivStyle: any = {
+    position: "fixed",
     top: "0",
     left:"0",
+    bottom:"0",
     right:"0",
-    bottom: "0",
-    position: "fixed",
   }
 
-  const canvasStyle: any = {
-    // height:"75%"
-    // background:"#000000"
-  }
 
   return (
     <>
@@ -89,11 +76,6 @@ const Home: NextPage = () => {
 
             </Canvas>
         </div>
-
-        {/* <div style={styles}>
-          <TreeGIFCaller src="/assets/tree_64.gif" width={64} height={64} />
-        </div> */}
-
         <div className="px-5" style={textStyle} >
           <h1 className="text-center  ">
             <span className="block text-2xl mb-2">Welcome to</span>
@@ -111,3 +93,4 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+

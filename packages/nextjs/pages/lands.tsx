@@ -1,36 +1,27 @@
 import type { NextPage } from "next";
+import { useState } from "react";
 import { MetaHeader } from "~~/components/MetaHeader";
-// import "svg-pan-zoom-container"
+import { gridLines, gridBoxColor } from "~~/components/PaintLand";
+
 
 const Lands: NextPage = () => {
 
+  const [localMousePos, setLocalMousePos] = useState({ x: 0, y: 0 });
+
+
   const svgEles = [];
+  svgEles.push(gridLines())
+  svgEles.push(gridBoxColor(landClick))
 
-  for (let i = 0; i <= 100; i++) {
-    svgEles.push(
-      <line x1={i * 10} y1={0} x2={i * 10} y2={1000} stroke="#ffffff" strokeWidth={0.2} ></line>
-    );
+  svgEles.push(
+    <image x="10.25" y="10.25" href="https://pic1.zhimg.com/v2-8e3abe6a02e63d96d0e8f341537300d4_b.webp" width="9.5" height="9.5" preserveAspectRatio="xMinYMin slice" opacity={1}></image>
+  )
+
+  function landClick(x: number, y: number) {
+    setLocalMousePos({ x, y })
   }
 
-  for (let i = 0; i <= 100; i++) {
-    svgEles.push(
-      <line x1={0} y1={i * 10} x2={1000} y2={i * 10} stroke="#ffffff" strokeWidth={0.2} ></line>
-    );
-  }
 
-  svgEles.push(
-    <rect x="0.25" y="0.25" width="9.5" height="9.5" fill="hsl(0,42%,40%)" opacity="1" ></rect>
-  )
-  svgEles.push(
-    <rect x="0.25" y="10.25" width="9.5" height="9.5" fill="hsl(0,42%,40%)" opacity="1" ></rect>
-  )
-  svgEles.push(
-    <rect x="0.25" y="20.25" width="9.5" height="9.5" fill="hsl(0,43%,41%)" opacity="1" ></rect>
-  )
-
-  svgEles.push(
-    <image x="10.25" y="10.25" href="https://stardewvalleywiki.com/mediawiki/images/4/4b/Daffodil.png" width="9.5" height="9.5" preserveAspectRatio="xMinYMin slice" opacity={1}></image>
-  )
 
   return (
     <>
@@ -40,40 +31,42 @@ const Lands: NextPage = () => {
       >
         {/* We are importing the font this way to lighten the size of SE2. */}
       </MetaHeader>
-      <div className="bg-base-100 w-screen h-screen block ">
-       
-          <div
-            className="block"
-            data-zoom-on-wheel="zoom-amount: 0.01; min-scale: 0.5; max-scale: 100;"
-            data-pan-on-drag="true">
-            <svg xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-              id="grid"
+      <div className="bg-base-100 w-screen h-screen block relative ">
+        <div
+          data-zoom-on-wheel="zoom-amount: 0.01; min-scale: 0.5; max-scale: 100;"
+          data-pan-on-drag="true">
+          <svg xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            id="grid"
+          >
+            <g id="viewport"
+              transform="matrix(0.571830985915493,0,0,0.571830985915493,104.0845070422535,0)"
+              className="svg-pan-zoom_viewport"
             >
-              <g id="viewport"
-                transform="matrix(0.571830985915493,0,0,0.571830985915493,104.0845070422535,0)"
-                className="svg-pan-zoom_viewport"
-              >
-                {svgEles}
-              </g>
-            </svg>
+              {svgEles}
+            </g>
+          </svg>
+
+
+        </div>
+
+        <div
+          className="card bg-base-300 shadow-xl fixed w-[360px] pointer-events-none right-16 top-16 bottom-8 p-8">
+          <b className="text-white">
+           {"Loction : "}({localMousePos.x}, {localMousePos.y})
+          </b>
+
+          <div className="bg-base-100 shadow-xl mt-4">
+            <div className="card-body">
+              <h2 className="card-title">No.1 🌲</h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div className="card-actions justify-end">
+                <button className="btn btn-primary">Buy Now</button>
+              </div>
+            </div>
           </div>
+        </div>
 
-
-        {/* <div style={{
-          width: "500px",
-          height:"100vh",
-          position: "fixed",
-          top: "0px",
-          bottom: "0",
-          right: "0",
-          overflow: "hidden",
-          overflowY: "hidden",
-          padding:"30px",
-          background: "#161923"
-        }}>
-
-        </div> */}
 
       </div>
     </>
