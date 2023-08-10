@@ -19,7 +19,7 @@
 
     library
     	--Constants.sol  所有的常量
-    	--Events.sol  所有的event事件
+    	--Events.sol  所有的event事件 不需要。自己写自己的
     	--TreeTypes.sol  ？  todo : move spec to  ForestSpec.sol 
     	--ForestDataLogic.sol  森林物种  todo : change to  ForestSpecies.sol 
 

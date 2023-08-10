@@ -4,6 +4,7 @@ pragma solidity ^0.8.16;
 
 library Events {
 
+   
     /**
      *  种子购买的event
      * @param who 谁购买的种子
@@ -14,6 +15,7 @@ library Events {
         uint indexed seedType, 
         uint256 indexed seedId
     );
+
 
     
 }
