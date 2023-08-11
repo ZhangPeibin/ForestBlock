@@ -1,10 +1,7 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.16;
-import "./library/Events.sol";
 
 contract ForestAccessControl {
-
-    
 
     /**
      * @notice 用来设置ceo,cfo地址
@@ -51,17 +48,17 @@ contract ForestAccessControl {
         _;
     }
 
-    function setCEO(address  newCeo) external onlyAdmin {
+    function setCEO(address  newCeo) public onlyAdmin {
         require( newCeo != address(0),"ceo address can't be address(0)");
         _ceo = newCeo;
     }
 
-     function setCFO(address payable newCfo) external onlyAdmin {
+     function setCFO(address payable newCfo) public onlyAdmin {
         require( newCfo != address(0),"ceo address can't be address(0)");
         _cfo = newCfo;
     }
 
-    function changeOwnerShip(address newAdmin) external onlyAdmin  {
+    function changeOwnerShip(address newAdmin) public onlyAdmin  {
         require( newAdmin != address(0),"owner can't be address(0) ");
         _admin = newAdmin;
     }

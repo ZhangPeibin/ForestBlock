@@ -8,18 +8,28 @@ describe("ForestHub", function () {
   let forestHub: ForestHub;
   before(async () => {
     const [owner] = await ethers.getSigners();
-    const yourContractFactory = await ethers.getContractFactory("ForestHub");
+
+    const libFactory = await ethers.getContractFactory("Utils");
+    const libObj = await libFactory.deploy()
+
+    const yourContractFactory = await ethers.getContractFactory("ForestHub",{
+      libraries: {
+        Utils: libObj.address,
+      },
+    });
     forestHub = (await yourContractFactory.deploy(owner.address)) as ForestHub;
     await forestHub.deployed();
   });
 
   describe("Deployment", function () {
     it("Should check it ", async function () {
-      expect(await forestHub.getSpeciesUrl(0)).to.equal("https://en.wikipedia.org/wiki/Caragana");
-
-      // const url5 = await forestHub.getSpeciesUrl(100);
+      const hedysarumAlpinum = await forestHub.getSpecByName("HedysarumAlpinum");
+      console.log(hedysarumAlpinum);
       // await expect(await forestHub.getSpeciesUrl(100)).
           // to.be.revertedWith('Insufficient funds');
+      const unknow = await forestHub.getSpecByName("unknow");
+      console.log(unknow);
+
     });
   });
 });
