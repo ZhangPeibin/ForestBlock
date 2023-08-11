@@ -12,12 +12,12 @@ describe("ForestHub", function () {
     const libFactory = await ethers.getContractFactory("Utils");
     const libObj = await libFactory.deploy()
 
-    const yourContractFactory = await ethers.getContractFactory("ForestHub",{
+    const forestHubFactory = await ethers.getContractFactory("ForestHub",{
       libraries: {
         Utils: libObj.address,
       },
     });
-    forestHub = (await yourContractFactory.deploy(owner.address)) as ForestHub;
+    forestHub = (await forestHubFactory.deploy(owner.address)) as ForestHub;
     await forestHub.deployed();
   });
 

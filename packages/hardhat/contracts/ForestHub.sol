@@ -5,8 +5,9 @@ import "./ForestBase.sol";
 
 contract ForestHub is ForestBase {
 
-    constructor(address _admin) {
-        
+    constructor() {
+        setCEO(msg.sender);
+        initDefaultSpecs();
     }
 
     
