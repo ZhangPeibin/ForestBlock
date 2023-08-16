@@ -19,6 +19,7 @@ pragma solidity ^0.8.16;
  * @notice 道具功能还在完善中
  */
 contract ForestItem {
+
 	/**
 	 * 初始的道具
 	 * 浇水道具
@@ -29,15 +30,34 @@ contract ForestItem {
 		string name;
 		/**
 		 * effect等价于 道具类型
-		 * 1: water
-		 * 2: Fertilize
+		 * 0: water
+		 * 1: Fertilize
 		 */
 		uint256 effect;
 		/**
 		 * 该道具是否可以转移
 		 */
 		bool canTransfer;
+
+		/**
+		 * @dev 该道具price
+		 */
+		uint256 price;
+	}	
+
+	enum EffectType {
+		WATER,
+		Fertilize
 	}
+
+	/**
+	 * @notice all item type 
+	 * @dev 1: 
+	 */
+	uint32[14] public effect = [
+		uint32(1),
+		uint32(2)
+	];
 
     /**
      * @dev 所有的道具数量
@@ -45,34 +65,43 @@ contract ForestItem {
 	uint256 _itemCount;
 
 	/**
+	 * @dev 道具的种类数量
+	 */
+	uint256 _effectTotal = 2;
+
+	/**
 	 * 创建water道具
 	 */
-	function _createWaterItem() public returns (Item memory _item) {
-		_item = createForestItem("water", 1, false);
+	function _createWaterItem() internal returns (Item memory _item) {
+		_item = _createForestItem(0, false);
 	}
 
 	/**
 	 * 创建默认的item
 	 */
-	function _createFertilizeItem() public returns (Item memory _item) {
-		_item = createForestItem("fertilize", 2, false);
+	function _createFertilizeItem() internal returns (Item memory _item) {
+		_item = _createForestItem(1, false);
 	}
 
 	/**
 	 *
-	 * @param _name 道具名称
 	 * @param _effect 道具效果 1:浇水道具 2: 施肥道具
 	 * @param canTransfer  是否能转让
 	 */
-	function createForestItem(
-		string memory _name,
+	function _createForestItem(
 		uint256 _effect,
 		bool canTransfer
-	) public returns (Item memory item) {
+	) internal returns (Item memory _item) {
+		if(_effect == 0){
+			_item.name = "water";
+		}else if(_effect == 1){
+			_item.name ="fertilize"; 
+		}
+		_item.id = _itemCount;
+		_item.effect = _effect;
+		_item.canTransfer = canTransfer;
 		_itemCount++;
-		item.name = _name;
-		item.id = _itemCount;
-		item.effect = _effect;
-		item.canTransfer = canTransfer;
 	}
+
+
 }

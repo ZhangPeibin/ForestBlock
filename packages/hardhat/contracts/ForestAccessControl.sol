@@ -28,11 +28,6 @@ contract ForestAccessControl {
     event AdminshipTransferred(address indexed preAdmin, address indexed newAdmin);
 
 
-    constructor() {
-        _transferAdminship(msg.sender);
-    }
-
-
     modifier onlyAdmin {
         require(msg.sender ==_admin);
         _;

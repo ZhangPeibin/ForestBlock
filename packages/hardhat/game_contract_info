@@ -10,16 +10,23 @@
 
 2: 合约层级
     -- ForestAccessControl
-    ------ForestBase    森林基础合约 
-    ------ForestSpecies   森林物种合约 (初始化森林物种信息，增加新物种，禁止某个物种继续种植)
+	------ForestSpec  森林物种合约 (初始化森林物种信息，增加新物种，禁止某个物种继续种植)
+	------ForestItem  道具合约 应该是一个ERC721行业
+    ------ForestBase  森林基础合约  每个人都有一个森林基地，里面可以种植各种各样的树
+	------ForestHub   main合约
 
 
 
     library
-    	--Constants.sol  所有的常量
-    	--Events.sol  所有的event事件 不需要。自己写自己的
     	--TreeTypes.sol  ？  todo : move spec to  ForestSpec.sol 
-    	--ForestDataLogic.sol  森林物种  todo : change to  ForestSpecies.sol 
+
+
+用户登录页面:
+initializeUserItems();
+前端需要调用 
+ForestSpec.getAllSpecies 来显示所有的物种
+用户选择某个spec后可以进行购买tree
+ForetHub.createTree 来创建树木
 
 
 

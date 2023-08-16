@@ -1,4 +1,4 @@
-// SPDX-License-Identifier : MIT
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.16;
 
 import "./ForestAccessControl.sol";
@@ -28,7 +28,7 @@ contract ForestSpec is ForestAccessControl {
 		QuercusPalustris // 540000
 	}
 
-	uint32[9] public defaultSpecMaxEnery = [
+	uint32[9] defaultSpecMaxEnery = [
 		uint32(16930),
 		uint32(21310),
 		uint32(85760),
@@ -49,6 +49,7 @@ contract ForestSpec is ForestAccessControl {
 	 * @max   最大种植数量
 	 */
 	struct Spec {
+		uint256 id;
 		string name;
 		string location;
 		string info;
@@ -57,14 +58,12 @@ contract ForestSpec is ForestAccessControl {
 		uint256 maxEnergy;
 	}
 
-	mapping(string => Spec) public specNameToSpec;
+	mapping(uint256 => Spec) public specIdToSpec;
 
 	/**
-	 * @dev 存放所有的物种名称
+	 * @dev the collection that store all specs
 	 */
-	string[] internal specNames;
-
-	uint256 internal specId = 0;
+	Spec[] internal species;
 
 	/**
 	 * 初始化默认的物种信息
@@ -158,7 +157,7 @@ contract ForestSpec is ForestAccessControl {
 		require(Utils.isBlankString(_wikiUrl), "spec wik url  can't be null");
 		require(_maxEnergy > 0, "spec maxEnergy can't be smaller than 0");
 
-		_addSpec(_specName, _info,_location, _wikiUrl, _maxEnergy);
+		_addSpec(_specName, _info, _location, _wikiUrl, _maxEnergy);
 	}
 
 	function _addSpec(
@@ -168,31 +167,31 @@ contract ForestSpec is ForestAccessControl {
 		string memory _wikiUrl,
 		uint256 _maxEnergy
 	) internal {
-		specNames.push(_specName);
-
 		Spec memory spec;
+		spec.id = species.length;
 		spec.name = _specName;
 		spec.location = _location;
 		spec.info = _info;
 		spec.wikiUrl = _wikiUrl;
 		spec.maxEnergy = _maxEnergy;
-		specNameToSpec[_specName] = spec;
+		specIdToSpec[spec.id] = spec;
+		species.push(spec);
 	}
 
+	/**
+	 * get all species 
+	 */
+	function getAllSpecies() external view returns(Spec[] memory _species) {
+		_species = species;
+	}
 
-	function getSpecByName(string memory name ) public view returns(
-		string memory _name,
-		string memory _location,
-		string memory _info,
-		string memory _wikirurl,
-		uint256  _maxenery
-	){
-		Spec memory localSpec = specNameToSpec[name];
-	    
-		_name = localSpec.name;
-		_location = localSpec.location;
-		_info = localSpec.info;
-		_wikirurl = localSpec.wikiUrl;
-		_maxenery = localSpec.maxEnergy;
+	/**
+	 * Find the corresponding spec according to the id
+	 * @param _specId the id of spec
+	 */
+	function getSpecById(
+		uint256 _specId
+	) public view returns (Spec memory _spec) {
+		_spec = specIdToSpec[_specId];
 	}
 }
