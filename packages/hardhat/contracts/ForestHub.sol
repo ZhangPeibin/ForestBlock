@@ -18,7 +18,7 @@ contract ForestHub is ForestBase {
 	 * @notice msg.value must be wei 
 	 */
 	function createTree(string memory _nickName, uint256 _specId) external payable {
-		require(_specId < species.length, "invalid specId");
+		require(_specId < specs.length, "invalid specId");
 		require(msg.value >= 10000000000000000, "You should pay at least 0.01 ETH for creating a tree");
 		_createTree(_nickName, _specId, msg.sender);
 	}

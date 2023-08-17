@@ -127,7 +127,7 @@ contract ForestBase is ForestSpec, ForestItem {
 			forestId: _forest.id,
 			nickName: _nickName,
 			energy: uint256(0),
-			spec: species[_specId],
+			spec: specs[_specId],
 			birthTime: uint64(block.timestamp),
 			wateringCoolDownEndTime: uint64(0),
 			fertilizeCoolDownEndTime: uint64(0),
