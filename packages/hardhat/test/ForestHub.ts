@@ -112,5 +112,10 @@ describe("ForestHub", function () {
       // const balanceIncrease = finalBalance.sub(oldBalance);
       // assert(balanceIncrease.eq(ethers.utils.parseEther("0.04")), "Balance not increased by 0.04 ETH");
     })
+
+
+    it("Test spec " , async function () {
+        await forestHub.species;
+    })
   });
 });

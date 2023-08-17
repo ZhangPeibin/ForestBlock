@@ -8,6 +8,7 @@ contract ForestHub is ForestBase {
 		initDefaultSpecs();
 	}
 
+
 	/**
 	 * create a tree
 	 * @param _nickName the tree nickname

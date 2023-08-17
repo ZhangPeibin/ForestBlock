@@ -6,29 +6,22 @@ import "./library/Utils.sol";
 
 contract ForestSpec is ForestAccessControl {
 	/**
-	 * @param Caragana 柠条
-	 * @param HedysarumAlpinum  高山岩黄芪
-	 * @param Elm 榆树
-	 * @param Platycladus 侧柏
-	 * @param CamphoraOfficinarum 樟树
-	 * @param Haloxylon 梭梭树
-	 * @param PiceaAsperata 云杉
-	 * @param AbiesFabri 冷杉
-	 * @param QuercusPalustris 橡树
+	 * species structure
 	 */
-	enum Species {
-		Caragana, // 16930
-		HedysarumAlpinum, // 21310
-		Elm, //85760
-		Platycladus, // 96000
-		CamphoraOfficinarum, //146210
-		Haloxylon, // 17900
-		PiceaAsperata, // 198000
-		AbiesFabri, //  330759
-		QuercusPalustris // 540000
+	struct Spec {
+		uint256 id;
+		string name;
+		string location;
+		string info;
+		string wikiUrl;
+		uint256 maxEnergy;
+		uint256 productionInterval; 
 	}
 
-	uint32[9] defaultSpecMaxEnery = [
+	/**
+	 * @dev The default initialized species energy
+	 */
+	uint32[] defaultSpecMaxEnery = [
 		uint32(16930),
 		uint32(21310),
 		uint32(85760),
@@ -41,33 +34,17 @@ contract ForestSpec is ForestAccessControl {
 	];
 
 	/**
-	 * 树的品种
-	 * @name  品种名称
-	 * @location 种植地点
-	 * @info  品种描述
-	 * @award 种植该品种的奖励
-	 * @max   最大种植数量
+	 * @notice the spec id navigate to spec
 	 */
-	struct Spec {
-		uint256 id;
-		string name;
-		string location;
-		string info;
-		string wikiUrl;
-		string[] award;
-		uint256 maxEnergy;
-	}
-
 	mapping(uint256 => Spec) public specIdToSpec;
 
 	/**
 	 * @dev the collection that store all specs
 	 */
-	Spec[] internal species;
+	Spec[] public species;
 
 	/**
-	 * 初始化默认的物种信息
-	 * 总共9个物种
+	 * Initialize a total of 9 default species information
 	 */
 	function initDefaultSpecs() internal virtual {
 		_addSpec(
@@ -137,12 +114,12 @@ contract ForestSpec is ForestAccessControl {
 
 	/**
 	 *
-	 * 由CEO添加一个新物种
-	 * @param _specName  物种名称
-	 * @param _location  物种适应地
-	 * @param _info   物种描述
-	 * @param _wikiUrl   物种wiki链接
-	 * @param _maxEnergy  物种最大能量
+	 * Add a new species by CEO
+	 * @param _specName  species name
+	 * @param _location  habitat of species
+	 * @param _info   description about spec 
+	 * @param _wikiUrl   the wiki link for this spec
+	 * @param _maxEnergy  the maxEnergy for this spec
 	 */
 	function addSpec(
 		string memory _specName,
@@ -174,17 +151,12 @@ contract ForestSpec is ForestAccessControl {
 		spec.info = _info;
 		spec.wikiUrl = _wikiUrl;
 		spec.maxEnergy = _maxEnergy;
+		spec.productionInterval = (_maxEnergy % 12) + 1;
 		specIdToSpec[spec.id] = spec;
 		species.push(spec);
 	}
 
-	/**
-	 * get all species 
-	 */
-	function getAllSpecies() external view returns(Spec[] memory _species) {
-		_species = species;
-	}
-
+	
 	/**
 	 * Find the corresponding spec according to the id
 	 * @param _specId the id of spec
@@ -192,6 +164,31 @@ contract ForestSpec is ForestAccessControl {
 	function getSpecById(
 		uint256 _specId
 	) public view returns (Spec memory _spec) {
+		require(_specId < species.length,"invalid spec id");
 		_spec = specIdToSpec[_specId];
+	}
+
+
+	/**
+	 * @param Caragana 柠条
+	 * @param HedysarumAlpinum  高山岩黄芪
+	 * @param Elm 榆树
+	 * @param Platycladus 侧柏
+	 * @param CamphoraOfficinarum 樟树
+	 * @param Haloxylon 梭梭树
+	 * @param PiceaAsperata 云杉
+	 * @param AbiesFabri 冷杉
+	 * @param QuercusPalustris 橡树
+	 */
+	enum Species {
+		Caragana, // 16930
+		HedysarumAlpinum, // 21310
+		Elm, //85760
+		Platycladus, // 96000
+		CamphoraOfficinarum, //146210
+		Haloxylon, // 17900
+		PiceaAsperata, // 198000
+		AbiesFabri, //  330759
+		QuercusPalustris // 540000
 	}
 }

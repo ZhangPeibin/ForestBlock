@@ -9,6 +9,8 @@ import "./ForestItem.sol";
  * @notice the main enter is ForestHub
  */
 contract ForestBase is ForestSpec, ForestItem {
+	/*** Data Types ***/
+
 	struct Forest {
 		/**
 		 * The id of each forest starts from 1,
@@ -61,12 +63,22 @@ contract ForestBase is ForestSpec, ForestItem {
 		 *  Fertilizer Cooldown
 		 */
 		uint64 fertilizeCoolDownEndTime;
+		/**
+		 * @dev The time when the fruit was last produced
+		 */
+		uint256 lastProductionTime;
 	}
 
+	/*** STORAGE ***/
+
 	/**
-	 * @notice 用户持有的道具
+	 * @dev A mapping from user address  to user's Items
 	 */
-	mapping(address => ForestItem.Item[]) addressWithForestItem;
+	mapping(address => ForestItem.Item[]) public addressWithForestItem;
+
+	/**
+	 * @dev A mapping from user address  to  user first sign in
+	 */
 	mapping(address => bool) isUserFirstIn;
 
 	/**
@@ -74,9 +86,12 @@ contract ForestBase is ForestSpec, ForestItem {
 	 * The ID of each Forest is actually an index into this array
 	 *
 	 */
-	Forest[] forests;
+	Forest[] forests;	
 
-	mapping(address => Forest) addressToForest;
+	/**
+	 * @dev A mapping from user address  to  the forest that owner them
+	 */
+	mapping(address => Forest) public addressToForest;
 
 	/**
 	 * All trees size
@@ -124,23 +139,12 @@ contract ForestBase is ForestSpec, ForestItem {
 		}
 	}
 
-	/**
-	 * get address's items
-	 */
-	function getUserItems(
-		address owner
-	) public view returns (ForestItem.Item[] memory _forestItem) {
-		_forestItem = addressWithForestItem[owner];
-	}
-
-	/**
-	 * get address's forest
-	 * @param owner  user's address
-	 */
-	function getUserForest(
-		address owner
-	) public view returns (Forest memory _forest) {
-		require(owner != address(0), "owner can't be 0 ");
-		_forest = addressToForest[owner];
+	function produceFruit(uint256 treeId) external {
+		// uint256 productionInterval = speciesContract.speciesData(treeData[treeId].speciesId).productionInterval;
+		// require(block.timestamp >= treeData[treeId].lastProductionTime + productionInterval, "Not enough time has passed");
+		// 触发产生果实逻辑
+		// ...
+		// 更新上次产生果实的时间
+		// treeData[treeId].lastProductionTime = block.timestamp;
 	}
 }
