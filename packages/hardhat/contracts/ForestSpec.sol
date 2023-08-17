@@ -15,6 +15,8 @@ contract ForestSpec is ForestAccessControl {
 		string info;
 		string wikiUrl;
 		uint256 maxEnergy;
+		/**Production interval, set during initialization,
+		 * you can receive some fruit after a certain production interval */
 		uint256 productionInterval; 
 	}
 
@@ -34,14 +36,9 @@ contract ForestSpec is ForestAccessControl {
 	];
 
 	/**
-	 * @notice the spec id navigate to spec
-	 */
-	mapping(uint256 => Spec) public specIdToSpec;
-
-	/**
 	 * @dev the collection that store all specs
 	 */
-	Spec[] public species;
+	Spec[]  specs;
 
 	/**
 	 * Initialize a total of 9 default species information
@@ -145,28 +142,23 @@ contract ForestSpec is ForestAccessControl {
 		uint256 _maxEnergy
 	) internal {
 		Spec memory spec;
-		spec.id = species.length;
+		spec.id = specs.length;
 		spec.name = _specName;
 		spec.location = _location;
 		spec.info = _info;
 		spec.wikiUrl = _wikiUrl;
 		spec.maxEnergy = _maxEnergy;
 		spec.productionInterval = (_maxEnergy % 12) + 1;
-		specIdToSpec[spec.id] = spec;
-		species.push(spec);
+		specs.push(spec);
 	}
 
-	
 	/**
-	 * Find the corresponding spec according to the id
-	 * @param _specId the id of spec
+	 * @dev get all specs
 	 */
-	function getSpecById(
-		uint256 _specId
-	) public view returns (Spec memory _spec) {
-		require(_specId < species.length,"invalid spec id");
-		_spec = specIdToSpec[_specId];
+	function getAllSpecs() public view returns(Spec[] memory _specs){
+		_specs = specs;
 	}
+	
 
 
 	/**

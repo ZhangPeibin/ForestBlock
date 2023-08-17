@@ -54,7 +54,7 @@ contract ForestItem {
 	 * @notice all item type 
 	 * @dev 1: 
 	 */
-	uint32[14] public effect = [
+	uint32[14]  effects = [
 		uint32(1),
 		uint32(2)
 	];

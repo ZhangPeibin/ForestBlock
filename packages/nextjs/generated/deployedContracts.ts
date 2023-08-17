@@ -5,7 +5,7 @@ const contracts = {
       name: "localhost",
       contracts: {
         ForestHub: {
-          address: "0x3Aa5ebB10DC797CAC828524e59A333d0A371443c",
+          address: "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
           abi: [
             {
               inputs: [],
@@ -71,13 +71,6 @@ const contracts = {
               type: "function",
             },
             {
-              inputs: [],
-              name: "_initForestItemForUserFirstIn",
-              outputs: [],
-              stateMutability: "nonpayable",
-              type: "function",
-            },
-            {
               inputs: [
                 {
                   internalType: "string",
@@ -113,35 +106,12 @@ const contracts = {
             {
               inputs: [
                 {
-                  internalType: "address",
-                  name: "newAdmin",
-                  type: "address",
-                },
-              ],
-              name: "changeOwnerShip",
-              outputs: [],
-              stateMutability: "nonpayable",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
-                  internalType: "string",
-                  name: "_name",
-                  type: "string",
-                },
-                {
                   internalType: "uint256",
                   name: "_effect",
                   type: "uint256",
                 },
-                {
-                  internalType: "bool",
-                  name: "canTransfer",
-                  type: "bool",
-                },
               ],
-              name: "createForestItem",
+              name: "buyForestItem",
               outputs: [
                 {
                   components: [
@@ -165,12 +135,30 @@ const contracts = {
                       name: "canTransfer",
                       type: "bool",
                     },
+                    {
+                      internalType: "uint256",
+                      name: "price",
+                      type: "uint256",
+                    },
                   ],
                   internalType: "struct ForestItem.Item",
-                  name: "item",
+                  name: "_item",
                   type: "tuple",
                 },
               ],
+              stateMutability: "payable",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "newAdmin",
+                  type: "address",
+                },
+              ],
+              name: "changeOwnerShip",
+              outputs: [],
               stateMutability: "nonpayable",
               type: "function",
             },
@@ -189,104 +177,17 @@ const contracts = {
               ],
               name: "createTree",
               outputs: [],
-              stateMutability: "nonpayable",
+              stateMutability: "payable",
               type: "function",
             },
             {
-              inputs: [
-                {
-                  internalType: "uint256",
-                  name: "_specId",
-                  type: "uint256",
-                },
-              ],
-              name: "getSpecById",
+              inputs: [],
+              name: "getContractBalance",
               outputs: [
                 {
                   internalType: "uint256",
-                  name: "_id",
+                  name: "",
                   type: "uint256",
-                },
-                {
-                  internalType: "string",
-                  name: "_name",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "_location",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "_info",
-                  type: "string",
-                },
-                {
-                  internalType: "string",
-                  name: "_wikirurl",
-                  type: "string",
-                },
-                {
-                  internalType: "uint256",
-                  name: "_maxenery",
-                  type: "uint256",
-                },
-              ],
-              stateMutability: "view",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
-                  internalType: "uint256",
-                  name: "_specId",
-                  type: "uint256",
-                },
-              ],
-              name: "getSpecStructById",
-              outputs: [
-                {
-                  components: [
-                    {
-                      internalType: "uint256",
-                      name: "id",
-                      type: "uint256",
-                    },
-                    {
-                      internalType: "string",
-                      name: "name",
-                      type: "string",
-                    },
-                    {
-                      internalType: "string",
-                      name: "location",
-                      type: "string",
-                    },
-                    {
-                      internalType: "string",
-                      name: "info",
-                      type: "string",
-                    },
-                    {
-                      internalType: "string",
-                      name: "wikiUrl",
-                      type: "string",
-                    },
-                    {
-                      internalType: "string[]",
-                      name: "award",
-                      type: "string[]",
-                    },
-                    {
-                      internalType: "uint256",
-                      name: "maxEnergy",
-                      type: "uint256",
-                    },
-                  ],
-                  internalType: "struct ForestSpec.Spec",
-                  name: "_spec",
-                  type: "tuple",
                 },
               ],
               stateMutability: "view",
@@ -296,11 +197,11 @@ const contracts = {
               inputs: [
                 {
                   internalType: "address",
-                  name: "owner",
+                  name: "_owner",
                   type: "address",
                 },
               ],
-              name: "getTree",
+              name: "getForestWithOwner",
               outputs: [
                 {
                   components: [
@@ -312,6 +213,11 @@ const contracts = {
                     {
                       internalType: "uint256",
                       name: "birthTime",
+                      type: "uint256",
+                    },
+                    {
+                      internalType: "uint256",
+                      name: "receiptPoints",
                       type: "uint256",
                     },
                     {
@@ -364,13 +270,13 @@ const contracts = {
                               type: "string",
                             },
                             {
-                              internalType: "string[]",
-                              name: "award",
-                              type: "string[]",
+                              internalType: "uint256",
+                              name: "maxEnergy",
+                              type: "uint256",
                             },
                             {
                               internalType: "uint256",
-                              name: "maxEnergy",
+                              name: "productionInterval",
                               type: "uint256",
                             },
                           ],
@@ -393,6 +299,16 @@ const contracts = {
                           name: "fertilizeCoolDownEndTime",
                           type: "uint64",
                         },
+                        {
+                          internalType: "uint256",
+                          name: "lastProductionTime",
+                          type: "uint256",
+                        },
+                        {
+                          internalType: "uint256",
+                          name: "receiptPoints",
+                          type: "uint256",
+                        },
                       ],
                       internalType: "struct ForestBase.Tree[]",
                       name: "trees",
@@ -413,8 +329,14 @@ const contracts = {
               type: "function",
             },
             {
-              inputs: [],
-              name: "getUserForestItems",
+              inputs: [
+                {
+                  internalType: "address",
+                  name: "_owner",
+                  type: "address",
+                },
+              ],
+              name: "getItemsWithOwner",
               outputs: [
                 {
                   components: [
@@ -438,9 +360,14 @@ const contracts = {
                       name: "canTransfer",
                       type: "bool",
                     },
+                    {
+                      internalType: "uint256",
+                      name: "price",
+                      type: "uint256",
+                    },
                   ],
                   internalType: "struct ForestItem.Item[]",
-                  name: "_forestItem",
+                  name: "_items",
                   type: "tuple[]",
                 },
               ],
@@ -449,7 +376,27 @@ const contracts = {
             },
             {
               inputs: [],
+              name: "initializeUserItems",
+              outputs: [],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [],
               name: "pause",
+              outputs: [],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "uint256",
+                  name: "_treeId",
+                  type: "uint256",
+                },
+              ],
+              name: "producePoint",
               outputs: [],
               stateMutability: "nonpayable",
               type: "function",
@@ -527,6 +474,60 @@ const contracts = {
                   name: "maxEnergy",
                   type: "uint256",
                 },
+                {
+                  internalType: "uint256",
+                  name: "productionInterval",
+                  type: "uint256",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              name: "species",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "id",
+                  type: "uint256",
+                },
+                {
+                  internalType: "string",
+                  name: "name",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "location",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "info",
+                  type: "string",
+                },
+                {
+                  internalType: "string",
+                  name: "wikiUrl",
+                  type: "string",
+                },
+                {
+                  internalType: "uint256",
+                  name: "maxEnergy",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "productionInterval",
+                  type: "uint256",
+                },
               ],
               stateMutability: "view",
               type: "function",
@@ -541,8 +542,37 @@ const contracts = {
           ],
         },
         Utils: {
-          address: "0x9A9f2CCfdE556A7E9Ff0848998Aa4a0CFD8863AE",
+          address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
           abi: [
+            {
+              inputs: [
+                {
+                  internalType: "uint256",
+                  name: "min",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "max",
+                  type: "uint256",
+                },
+                {
+                  internalType: "uint256",
+                  name: "seed",
+                  type: "uint256",
+                },
+              ],
+              name: "getRandomNumber",
+              outputs: [
+                {
+                  internalType: "uint256",
+                  name: "",
+                  type: "uint256",
+                },
+              ],
+              stateMutability: "view",
+              type: "function",
+            },
             {
               inputs: [
                 {

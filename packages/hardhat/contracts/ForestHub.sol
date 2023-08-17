@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.16;
 import "./ForestBase.sol";
+import "./library/Utils.sol";
 
 contract ForestHub is ForestBase {
 	constructor() {
@@ -28,15 +29,32 @@ contract ForestHub is ForestBase {
 	 * 购买 道具
 	 * @param _effect 道具id
 	 */
-	function buyFrestItem(uint256 _effect ) public payable returns(Item memory _item){
+	function buyForestItem(uint256 _effect ) public payable returns(Item memory _item){
 		require(_effect < _effectTotal,"unknown item effect");
 		_item = _createForestItem(_effect,true);
 	}
 
 	
+	/**
+	 * get this contract balance
+	 */
 	function getContractBalance() public view returns (uint256) {
         return address(this).balance;
     }
 
+
+	/**
+	 * @dev Ways to Earn Points
+	 * @param _treeId  the tree 's id
+	 */
+	function producePoint(uint256 _treeId) external {
+		require(_treeId >0 && _treeId < trees.length,"treeId doesn't exist");
+		uint256 productionInterval  = trees[_treeId].spec.productionInterval;
+		require(block.timestamp >= trees[_treeId].lastProductionTime + productionInterval, "Not enough time has passed");
+		uint256 _points = Utils.getRandomNumber(3,9,trees[_treeId].spec.maxEnergy % 12);
+		trees[_treeId].receiptPoints += _points;
+		forests[trees[_treeId].forestId].receiptPoints +=_points;
+		trees[_treeId].lastProductionTime = block.timestamp;
+	}
 
 }
