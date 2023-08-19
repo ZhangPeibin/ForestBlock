@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { Bars3Icon} from "@heroicons/react/24/outline";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import { FaucetButton, RainbowKitCustomConnectButton } from "~~/components/scaffold-eth";
 import { useOutsideClick } from "~~/hooks/scaffold-eth";
 
@@ -14,9 +14,8 @@ const NavLink = ({ href, children }: { href: string; children: React.ReactNode }
     <Link
       href={href}
       passHref
-      className={`${
-        isActive ? "bg-secondary shadow-md" : ""
-      } hover:bg-secondary hover:shadow-md focus:bg-secondary py-1.5 px-3 text-sm rounded-full gap-2`}
+      className={`${isActive ? "shadow-md" : ""
+        } hover:bg-secondary hover:shadow-md focus:bg-secondary py-1.5 px-3 text-sm rounded-full gap-2`}
     >
       {children}
     </Link>
@@ -27,35 +26,40 @@ const NavLink = ({ href, children }: { href: string; children: React.ReactNode }
  * Site header
  */
 export const Header = () => {
+  const router = useRouter();
+  console.log(router.pathname);
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const burgerMenuRef = useRef<HTMLDivElement>(null);
   useOutsideClick(
     burgerMenuRef,
     useCallback(() => setIsDrawerOpen(false), []),
   );
-
+  console.log()
   const navLinks = (
     <>
-      <li>
-        <NavLink href="/">Home</NavLink>
-      </li>
-      <li>
-        <NavLink href="/lands">
-          Lands
-        </NavLink>
-      </li>
+
+      {
+        router.pathname == "/" &&
+        <li>
+          <NavLink href="/lands">
+            -{">"} Lands
+          </NavLink>
+        </li>
+      }
+
+      {
+        router.pathname == "/lands" &&
+        <li>
+          <NavLink href="/"> -{">"} Home </NavLink>
+        </li>
+      }
+
       <li>
         <NavLink href="/debug">
           Debug Contracts
         </NavLink>
       </li>
-      
-      {/* <li>
-        <NavLink href="/blockexplorer">
-          <MagnifyingGlassIcon className="h-4 w-4" />
-          Block Explorer
-        </NavLink>
-      </li> */}
     </>
   );
 
@@ -84,16 +88,9 @@ export const Header = () => {
             </ul>
           )}
         </div>
-        <Link href="/" passHref className="hidden lg:flex items-center gap-2 ml-4 mr-6">
-          <div className="flex relative w-10 h-10">
-            {/* <Image alt="SE2 logo" className="cursor-pointer" fill src="/a.webp" /> */}
-          </div>
-          <div className="flex flex-col">
-            <span className="font-bold leading-tight">🌳 CryptoForest</span>
-            {/* <span className="text-xs">Ethereum dev stack</span> */}
-          </div>
-        </Link>
+        <div className="hidden lg:flex items-center gap-2 ml-4 mr-6" />
         <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">{navLinks}</ul>
+
       </div>
       <div className="navbar-end flex-grow mr-4">
         <RainbowKitCustomConnectButton />

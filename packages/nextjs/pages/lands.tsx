@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { useState } from "react";
+import { Header } from "~~/components/Header";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { gridLines, gridBoxColor } from "~~/components/PaintLand";
 
@@ -21,16 +22,13 @@ const Lands: NextPage = () => {
     setLocalMousePos({ x, y })
   }
 
-
-
   return (
     <>
       <MetaHeader
         title="CryptoForest | Lands"
         description=""
-      >
-        {/* We are importing the font this way to lighten the size of SE2. */}
-      </MetaHeader>
+      />
+      
       <div className="bg-base-300 w-screen h-screen block relative ">
         <div
           data-zoom-on-wheel="zoom-amount: 0.01; min-scale: 0.5; max-scale: 100;"
@@ -53,7 +51,7 @@ const Lands: NextPage = () => {
         <div
           className="card bg-base-200 shadow-xl fixed w-[360px] pointer-events-none right-16 top-16 bottom-8 p-8">
           <b className="text-white">
-           {"Loction : "}({localMousePos.x}, {localMousePos.y})
+            {"Loction : "}({localMousePos.x}, {localMousePos.y})
           </b>
 
           <div className="bg-base-100 shadow-xl mt-4">
