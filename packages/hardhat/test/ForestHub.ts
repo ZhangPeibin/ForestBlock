@@ -22,14 +22,16 @@ describe("ForestHub", function () {
   });
 
   describe("Deployment", function () {
-    it("Test spec default data  ", async function () {
-      const hedysarumAlpinum = await forestHub.species(0);
-      // console.log(hedysarumAlpinum);
+    it("Test spec default data", async function () {
+      const allSpecs:any = await forestHub.getAllSpecs();
+      console.log(allSpecs);
+      const hedysarumAlpinum = allSpecs[0];
+      console.log(hedysarumAlpinum);
       expect(hedysarumAlpinum.maxEnergy).to.equal(16930)
       // await expect(await forestHub.getSpeciesUrl(100)).
       // to.be.revertedWith('Insufficient funds');
-      const unknow = await forestHub.species(9);
-      expect(unknow.maxEnergy).to.equal(0)
+      const unknow = allSpecs[9];
+      expect(unknow).to.equal(undefined)
 
       // console.log(unknow);
     });
@@ -115,7 +117,6 @@ describe("ForestHub", function () {
 
 
     it("Test spec " , async function () {
-        await forestHub.species;
     })
   });
 });

@@ -5,7 +5,7 @@ const contracts = {
       name: "localhost",
       contracts: {
         ForestHub: {
-          address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
+          address: "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0",
           abi: [
             {
               inputs: [],
@@ -74,6 +74,29 @@ const contracts = {
               inputs: [
                 {
                   internalType: "string",
+                  name: "_name",
+                  type: "string",
+                },
+                {
+                  internalType: "enum ForestItem.EffectType",
+                  name: "_effectType",
+                  type: "uint8",
+                },
+                {
+                  internalType: "uint256",
+                  name: "_price",
+                  type: "uint256",
+                },
+              ],
+              name: "addNewItemToForest",
+              outputs: [],
+              stateMutability: "nonpayable",
+              type: "function",
+            },
+            {
+              inputs: [
+                {
+                  internalType: "string",
                   name: "_specName",
                   type: "string",
                 },
@@ -106,52 +129,6 @@ const contracts = {
             {
               inputs: [
                 {
-                  internalType: "uint256",
-                  name: "_effect",
-                  type: "uint256",
-                },
-              ],
-              name: "buyForestItem",
-              outputs: [
-                {
-                  components: [
-                    {
-                      internalType: "uint256",
-                      name: "id",
-                      type: "uint256",
-                    },
-                    {
-                      internalType: "string",
-                      name: "name",
-                      type: "string",
-                    },
-                    {
-                      internalType: "uint256",
-                      name: "effect",
-                      type: "uint256",
-                    },
-                    {
-                      internalType: "bool",
-                      name: "canTransfer",
-                      type: "bool",
-                    },
-                    {
-                      internalType: "uint256",
-                      name: "price",
-                      type: "uint256",
-                    },
-                  ],
-                  internalType: "struct ForestItem.Item",
-                  name: "_item",
-                  type: "tuple",
-                },
-              ],
-              stateMutability: "payable",
-              type: "function",
-            },
-            {
-              inputs: [
-                {
                   internalType: "address",
                   name: "newAdmin",
                   type: "address",
@@ -178,6 +155,46 @@ const contracts = {
               name: "createTree",
               outputs: [],
               stateMutability: "payable",
+              type: "function",
+            },
+            {
+              inputs: [],
+              name: "getAllItems",
+              outputs: [
+                {
+                  components: [
+                    {
+                      internalType: "uint256",
+                      name: "id",
+                      type: "uint256",
+                    },
+                    {
+                      internalType: "string",
+                      name: "name",
+                      type: "string",
+                    },
+                    {
+                      internalType: "enum ForestItem.EffectType",
+                      name: "effect",
+                      type: "uint8",
+                    },
+                    {
+                      internalType: "uint256",
+                      name: "price",
+                      type: "uint256",
+                    },
+                    {
+                      internalType: "bool",
+                      name: "hasAddToForest",
+                      type: "bool",
+                    },
+                  ],
+                  internalType: "struct ForestItem.Item[]",
+                  name: "_items",
+                  type: "tuple[]",
+                },
+              ],
+              stateMutability: "view",
               type: "function",
             },
             {
@@ -401,19 +418,19 @@ const contracts = {
                       type: "string",
                     },
                     {
-                      internalType: "uint256",
+                      internalType: "enum ForestItem.EffectType",
                       name: "effect",
-                      type: "uint256",
-                    },
-                    {
-                      internalType: "bool",
-                      name: "canTransfer",
-                      type: "bool",
+                      type: "uint8",
                     },
                     {
                       internalType: "uint256",
                       name: "price",
                       type: "uint256",
+                    },
+                    {
+                      internalType: "bool",
+                      name: "hasAddToForest",
+                      type: "bool",
                     },
                   ],
                   internalType: "struct ForestItem.Item[]",

@@ -20,7 +20,6 @@ contract ForestBase is ForestSpec, ForestItem {
 		 * @dev The birth time of this forest
 		 */
 		uint256 birthTime;
-
 		/**
 		 * @dev Points harvested by all trees below the forest
 		 */
@@ -33,7 +32,6 @@ contract ForestBase is ForestSpec, ForestItem {
 		 * @dev the owner of this forest
 		 */
 		address owner;
-
 	}
 
 	struct Tree {
@@ -73,7 +71,6 @@ contract ForestBase is ForestSpec, ForestItem {
 		 * @dev The time when the fruit was last produced
 		 */
 		uint256 lastProductionTime;
-
 		/**
 		 * @dev points accumulated by this tree
 		 */
@@ -107,7 +104,7 @@ contract ForestBase is ForestSpec, ForestItem {
 	/**
 	 * @dev A mapping from user address  to  the forest that owner them
 	 */
-	mapping(address => Forest)  addressToForest;
+	mapping(address => Forest) addressToForest;
 
 	function _createTree(
 		string memory _nickName,
@@ -132,7 +129,7 @@ contract ForestBase is ForestSpec, ForestItem {
 			wateringCoolDownEndTime: uint64(0),
 			fertilizeCoolDownEndTime: uint64(0),
 			lastProductionTime: uint256(0),
-			receiptPoints:uint256(0)
+			receiptPoints: uint256(0)
 		});
 
 		_forest.trees.push(_tree);
@@ -140,24 +137,27 @@ contract ForestBase is ForestSpec, ForestItem {
 	}
 
 	/**
-	 * 
+	 *
 	 * @dev When the user logs in for the first time, get a water item and a fertilize item
 	 * @notice These two items are not transferable
 	 */
 	function initializeUserItems() external {
 		if (!isUserFirstIn[msg.sender]) {
 			isUserFirstIn[msg.sender] = true;
-			addressToItems[msg.sender].push(_createWaterItem());
-			addressToItems[msg.sender].push(_createFertilizeItem());
+			// addressToItems[msg.sender].push(_createWaterItem());
+			// addressToItems[msg.sender].push(_createFertilizeItem());
 		}
 	}
 
-	
-	function getItemsWithOwner(address _owner) public view returns(ForestItem.Item[] memory _items){
+	function getItemsWithOwner(
+		address _owner
+	) public view returns (ForestItem.Item[] memory _items) {
 		_items = addressToItems[_owner];
 	}
 
-	function getForestWithOwner(address _owner) public view returns(Forest memory _forest){
+	function getForestWithOwner(
+		address _owner
+	) public view returns (Forest memory _forest) {
 		return addressToForest[_owner];
-	} 
+	}
 }

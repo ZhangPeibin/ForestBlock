@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.16;
+import "./ForestAccessControl.sol";
 
 /**
- *
  *
  * 增长道具： 增加树木的生长速度或能量值，帮助玩家更快地种植满树木。
  * 保护道具： 保护树木免受虫害、自然灾害等影响，维持树木的健康状态。
@@ -18,90 +18,116 @@ pragma solidity ^0.8.16;
  * @author pb
  * @notice 道具功能还在完善中
  */
-contract ForestItem {
+contract ForestItem is ForestAccessControl {
+
 
 	/**
-	 * 初始的道具
-	 * 浇水道具
-	 * 施肥道具
+	 * @dev Item struct that describe the Item
+	 * @notice only ceo can add new items
 	 */
 	struct Item {
 		uint256 id;
 		string name;
-		/**
-		 * effect等价于 道具类型
-		 * 0: water
-		 * 1: Fertilize
-		 */
-		uint256 effect;
-		/**
-		 * 该道具是否可以转移
-		 */
-		bool canTransfer;
-
-		/**
-		 * @dev 该道具price
-		 */
+		// the effect for this item
+		EffectType effect;
+		// item's price
 		uint256 price;
-	}	
+		// To check that this item has already add into forest
+		bool hasAddToForest;
+	}
 
+	/**
+	 * @dev An enumeration of defined prop effect types
+	 */
 	enum EffectType {
 		WATER,
-		Fertilize
+		FERTILIZE,
+		WEEDING,
+		INSECTICIDE
 	}
 
 	/**
-	 * @notice all item type 
-	 * @dev 1: 
+	 * @dev An array that contains all items
 	 */
-	uint32[14]  effects = [
-		uint32(1),
-		uint32(2)
-	];
-
-    /**
-     * @dev 所有的道具数量
-     */
-	uint256 _itemCount;
+	Item[] items;
 
 	/**
-	 * @dev 道具的种类数量
+	 * @dev An map that from effecType to
 	 */
-	uint256 _effectTotal = 2;
+	mapping(EffectType => Item) effectTypeToItem;
 
-	/**
-	 * 创建water道具
-	 */
-	function _createWaterItem() internal returns (Item memory _item) {
-		_item = _createForestItem(0, false);
+
+	constructor(){
+		_initDefaultForestItems();
+	}
+
+	function _initDefaultForestItems() internal  {
+		_addNewItemToForest("Water",EffectType.WATER,0.001 ether);
+		_addNewItemToForest("Fertilize",EffectType.FERTILIZE,0.001 ether);
+		_addNewItemToForest("Weeding",EffectType.WEEDING,0.001 ether);
+		_addNewItemToForest("Insecticide",EffectType.INSECTICIDE,0.001 ether);
 	}
 
 	/**
-	 * 创建默认的item
+	 * @dev the getter method for 'items' 
 	 */
-	function _createFertilizeItem() internal returns (Item memory _item) {
-		_item = _createForestItem(1, false);
+	function getAllItems() external view returns(Item[] memory _items){
+		_items = items;
+	}
+
+
+	/**
+	 * @dev the function to add new Item into forest world
+	 * @param _name Item's name
+	 * @param _effectType  Item's effectType
+	 * @param _price  Item's price
+	 */
+	function addNewItemToForest(
+		string memory _name,
+		EffectType _effectType,
+		uint256 _price
+	) public onlyCEO {
+		require(
+			_effectType == EffectType.WATER ||
+				_effectType == EffectType.FERTILIZE || 
+				_effectType == EffectType.WEEDING || 
+				_effectType == EffectType.INSECTICIDE,
+			"Invalid effect type"
+		);
+		_addNewItemToForest(_name, _effectType, _price);
 	}
 
 	/**
-	 *
-	 * @param _effect 道具效果 1:浇水道具 2: 施肥道具
-	 * @param canTransfer  是否能转让
+	 * @dev This method is the concrete implementation of adding props
+	 * @param _name Item's name
+	 * @param _effectType Item's effectType
+	 * @param _price Item's price
 	 */
-	function _createForestItem(
-		uint256 _effect,
-		bool canTransfer
-	) internal returns (Item memory _item) {
-		if(_effect == 0){
-			_item.name = "water";
-		}else if(_effect == 1){
-			_item.name ="fertilize"; 
+	function _addNewItemToForest(
+		string memory _name,
+		EffectType _effectType,
+		uint256 _price
+	) internal {
+		if (effectTypeToItem[_effectType].hasAddToForest) {
+			// item has already add into this forest
+			// should update
+			items[effectTypeToItem[_effectType].id].name = _name;
+			items[effectTypeToItem[_effectType].id].effect = _effectType;
+			items[effectTypeToItem[_effectType].id].price = _price;
+
+			effectTypeToItem[_effectType] = items[
+				effectTypeToItem[_effectType].id
+			];
+		} else {
+			Item memory _item = Item({
+				id: items.length,
+				name: _name,
+				effect: _effectType,
+				price: _price,
+				hasAddToForest: true
+			});
+			items.push(_item);
+			effectTypeToItem[_effectType] = items[_item.id];
 		}
-		_item.id = _itemCount;
-		_item.effect = _effect;
-		_item.canTransfer = canTransfer;
-		_itemCount++;
 	}
-
-
 }

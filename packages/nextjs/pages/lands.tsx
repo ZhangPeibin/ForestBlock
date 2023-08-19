@@ -26,12 +26,12 @@ const Lands: NextPage = () => {
   return (
     <>
       <MetaHeader
-        title="ForestBlock | Lands"
+        title="CryptoForest | Lands"
         description=""
       >
         {/* We are importing the font this way to lighten the size of SE2. */}
       </MetaHeader>
-      <div className="bg-base-100 w-screen h-screen block relative ">
+      <div className="bg-base-300 w-screen h-screen block relative ">
         <div
           data-zoom-on-wheel="zoom-amount: 0.01; min-scale: 0.5; max-scale: 100;"
           data-pan-on-drag="true">
@@ -51,7 +51,7 @@ const Lands: NextPage = () => {
         </div>
 
         <div
-          className="card bg-base-300 shadow-xl fixed w-[360px] pointer-events-none right-16 top-16 bottom-8 p-8">
+          className="card bg-base-200 shadow-xl fixed w-[360px] pointer-events-none right-16 top-16 bottom-8 p-8">
           <b className="text-white">
            {"Loction : "}({localMousePos.x}, {localMousePos.y})
           </b>
