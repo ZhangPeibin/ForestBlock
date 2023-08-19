@@ -4,11 +4,15 @@ import { Header } from "~~/components/Header";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { gridLines, gridBoxColor } from "~~/components/PaintLand";
 
+export type LandClickType = (arg1: number, arg2: number) => void;
 
 const Lands: NextPage = () => {
 
   const [localMousePos, setLocalMousePos] = useState({ x: 0, y: 0 });
 
+  const landClick : LandClickType = (x: number, y: number)=>{
+    setLocalMousePos({ x, y })
+  }
 
   const svgEles = [];
   svgEles.push(gridLines())
@@ -16,11 +20,7 @@ const Lands: NextPage = () => {
 
   svgEles.push(
     <image x="10.25" y="10.25" href="https://pic1.zhimg.com/v2-8e3abe6a02e63d96d0e8f341537300d4_b.webp" width="9.5" height="9.5" preserveAspectRatio="xMinYMin slice" opacity={1}></image>
-  )
-
-  function landClick(x: number, y: number) {
-    setLocalMousePos({ x, y })
-  }
+  ) 
 
   return (
     <>

@@ -72,7 +72,6 @@ const Home: NextPage = () => {
 
   return (
     <div className="w-screen h-full flex-col">
-    
       <section>
         <div className="px-5" >
           <h1 className="text-center  ">
@@ -95,7 +94,7 @@ const Home: NextPage = () => {
                 <div>
                   <span className="card-title">What is CryptoForest</span>
                   <p >
-                    CryptoForest leads innovative full-chain green and low-carbon projects. We transform the user's on-chain transaction behavior into valuable forest energy to nourish the ever-growing blockchain virtual tree.
+                    CryptoForest leads innovative full-chain green and low-carbon projects. We transform the on-chain transaction behavior into valuable forest energy to nourish the ever-growing blockchain virtual tree.
                     In the crypto forest, every transaction is a sowing, and every attention is a watering.
                     <br />
                     When the virtual tree matures, you will receive a valuable tree-planting certificate and contribute a corresponding real tree to real-world ecology.</p>
@@ -127,7 +126,7 @@ const Home: NextPage = () => {
                   <h2 className="card-title">🌲 Forest species</h2>
                   {(result as Array<string>)?.map((item: any, index) => (
                     <h2 key={item['id']} className="link">
-                      <a target="_blank" href={item['wikiUrl']}>{item['name']}</a>
+                      <a target="_blank" rel="noreferrer" href={item['wikiUrl']}>{item['name']}</a>
                     </h2>
                   ))}
                 </div>

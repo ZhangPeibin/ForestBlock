@@ -13,6 +13,8 @@
  * @returns 
  */
 
+import { LandClickType } from "~~/pages/lands";
+
 export function gridLines() {
     const lines = [];
 
@@ -31,7 +33,7 @@ export function gridLines() {
     return lines;
 }
 
-export function gridBoxColor(callback:Function) {
+export function gridBoxColor(callback:LandClickType) {
     const colors = [];
 
     for (let x = 0; x < 100; x++) {
