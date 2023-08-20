@@ -1,10 +1,9 @@
 import * as dotenv from "dotenv";
 dotenv.config();
-import { HardhatUserConfig } from "hardhat/config";
+import { HardhatUserConfig, task } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "hardhat-deploy";
-import "@matterlabs/hardhat-zksync-solc";
-import "@matterlabs/hardhat-zksync-verify";
+import "@nomicfoundation/hardhat-ethers";
 
 // If not set, it uses ours Alchemy's default API key.
 // You can get your own at https://dashboard.alchemyapi.io
@@ -14,6 +13,13 @@ const deployerPrivateKey =
   process.env.DEPLOYER_PRIVATE_KEY ?? "0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80";
 // If not set, it uses ours Etherscan default API key.
 const etherscanApiKey = process.env.ETHERSCAN_API_KEY || "DNXJA8RX2Q3VZ4URQIWP7Z68CJXQZSC6AW";
+
+task("balance", "Prints an account's balance")
+  .addParam("account", "The account's address")
+  .setAction(async (taskArgs) => {
+    const balance = await ethers.provider.getBalance(taskArgs.account);
+    console.log(ethers.formatEther(balance), "ETH");
+  });
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -77,25 +83,14 @@ const config: HardhatUserConfig = {
     polygonMumbai: {
       url: `https://polygon-mumbai.g.alchemy.com/v2/${providerApiKey}`,
       accounts: [deployerPrivateKey],
-    },
-    zkSyncTestnet: {
-      url: "https://testnet.era.zksync.dev",
-      zksync: true,
-      accounts: [deployerPrivateKey],
-      verifyURL: "https://zksync2-testnet-explorer.zksync.dev/contract_verification",
-    },
-    zkSync: {
-      url: "https://mainnet.era.zksync.io",
-      zksync: true,
-      accounts: [deployerPrivateKey],
-      verifyURL: "https://zksync2-mainnet-explorer.zksync.io/contract_verification",
-    },
+    }
   },
   verify: {
     etherscan: {
       apiKey: `${etherscanApiKey}`,
     },
   },
+
 };
 
 export default config;
