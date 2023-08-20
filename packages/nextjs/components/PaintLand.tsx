@@ -15,18 +15,22 @@
 
 import { LandClickType } from "~~/pages/lands";
 
+export function getTranslateY(){
+    return 30;
+}
+
 export function gridLines() {
     const lines = [];
 
     for (let i = 0; i <= 100; i++) {
         lines.push(
-            <line x1={i * 10} y1={0} x2={i * 10} y2={1000} stroke="#000000" strokeWidth={0.2} ></line>
+            <line x1={i * 10} y1={getTranslateY()} x2={i * 10} y2={1000+getTranslateY()} stroke="#000000" strokeWidth={0.2} ></line>
         );
     }
 
     for (let i = 0; i <= 100; i++) {
         lines.push(
-            <line x1={0} y1={i * 10} x2={1000} y2={i * 10} stroke="#000000" strokeWidth={0.2} ></line>
+            <line x1={0} y1={i * 10+getTranslateY()} x2={1000} y2={i * 10+getTranslateY()} stroke="#000000" strokeWidth={0.2} ></line>
         );
     }
 
@@ -45,7 +49,7 @@ export function gridBoxColor(callback:LandClickType) {
             const lightness = 40;
             colors.push(
                 <rect onClick={(event)=>callback(x,y)}
-                    x={0.25 + x * 10} y={0.25 + y * 10} width="9.5" height="9.5" fill={`hsl(${h}, ${saturation}%, ${lightness}%)`} opacity="1" ></rect>
+                    x={0.25 + x * 10} y={0.25 + y * 10+getTranslateY()} width="9.5" height="9.5" fill={`hsl(${h}, ${saturation}%, ${lightness}%)`} opacity="1" ></rect>
             )
         }
     }

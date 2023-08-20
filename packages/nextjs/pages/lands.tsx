@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { useState } from "react";
 import { Header } from "~~/components/Header";
 import { MetaHeader } from "~~/components/MetaHeader";
-import { gridLines, gridBoxColor } from "~~/components/PaintLand";
+import { gridLines, gridBoxColor, getTranslateY } from "~~/components/PaintLand";
 
 export type LandClickType = (arg1: number, arg2: number) => void;
 
@@ -10,7 +10,7 @@ const Lands: NextPage = () => {
 
   const [localMousePos, setLocalMousePos] = useState({ x: 0, y: 0 });
 
-  const landClick : LandClickType = (x: number, y: number)=>{
+  const landClick: LandClickType = (x: number, y: number) => {
     setLocalMousePos({ x, y })
   }
 
@@ -19,8 +19,8 @@ const Lands: NextPage = () => {
   svgEles.push(gridBoxColor(landClick))
 
   svgEles.push(
-    <image x="10.25" y="10.25" href="https://pic1.zhimg.com/v2-8e3abe6a02e63d96d0e8f341537300d4_b.webp" width="9.5" height="9.5" preserveAspectRatio="xMinYMin slice" opacity={1}></image>
-  ) 
+    <image x="10.25" y={10.25+getTranslateY()} href="https://pic1.zhimg.com/v2-8e3abe6a02e63d96d0e8f341537300d4_b.webp" width="9.5" height="9.5" preserveAspectRatio="xMinYMin slice" opacity={1}></image>
+  )
 
   return (
     <>
@@ -28,7 +28,7 @@ const Lands: NextPage = () => {
         title="CryptoForest | Lands"
         description=""
       />
-      
+
       <div className="bg-base-300 w-screen h-screen block relative ">
         <div
           data-zoom-on-wheel="zoom-amount: 0.01; min-scale: 0.5; max-scale: 100;"
@@ -42,7 +42,9 @@ const Lands: NextPage = () => {
               className="svg-pan-zoom_viewport"
             >
               {svgEles}
+              <text x="0" y="20"  fill="green">Verdantia land </text>
             </g>
+
           </svg>
 
 
