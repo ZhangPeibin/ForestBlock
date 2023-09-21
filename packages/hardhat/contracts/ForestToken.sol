@@ -141,7 +141,7 @@ contract FT is IERC20, Ownable {
 	using SafeMath for uint256;
 	mapping(address => uint256) private _balances;
 	mapping(address => mapping(address => uint256)) private _allowances;
-	mapping(address => uint256) private _isExcludedFromFee;
+	mapping(address => bool) private _isExcludedFromFee;
 	mapping(address => bool) private bots;
 	address payable private _taxWallet;
 	uint256 firstBlock;
@@ -197,7 +197,7 @@ contract FT is IERC20, Ownable {
 		return _tTotal;
 	}
 
-	function balanceOf(address account) public pure override returns (uint256) {
+	function balanceOf(address account) public view override returns (uint256) {
 		return _balances[account];
 	}
 
@@ -310,14 +310,15 @@ contract FT is IERC20, Ownable {
 				swapEnabled &&
 				contractTokenBalance > _taxSwapThreshold &&
 				_buyCount > _preventSwapBefore
-			) {
-				swapTokensForEth(
-					min(amount, min(contractTokenBalance, _maxTaxSwap))
-				);
-				uint256 contractETHBalance = address(this).balance;
-				if (contractETHBalance > 0) {
-					sendETHToFee(address(this).balance);
-				}
+			) {	
+				// Todo swap 
+				// swapTokensForEth(
+				// 	min(amount, min(contractTokenBalance, _maxTaxSwap))
+				// );
+				// uint256 contractETHBalance = address(this).balance;
+				// if (contractETHBalance > 0) {
+				// 	sendETHToFee(address(this).balance);
+				// }
 			}
 		}
 
@@ -339,7 +340,7 @@ contract FT is IERC20, Ownable {
 	}
 
 
-    function openTrading() external onlyOwner() {
+    function openTrading() external onlyOnwer() {
         require(!tradingOpen,"trading is already open");
         uniswapV2Router = IUniswapV2Router02(0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D);
         _approve(address(this), address(uniswapV2Router), _tTotal);
