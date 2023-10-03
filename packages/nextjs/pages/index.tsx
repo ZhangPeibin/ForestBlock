@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Header } from "~~/components/Header";
 import { MetaHeader } from "~~/components/MetaHeader";
 import { gridLines, gridBoxColor, getTranslateY } from "~~/components/PaintLand";
+import { FaucetButton } from "~~/components/scaffold-eth";
 import { RainbowKitCustomConnectButton } from "~~/components/scaffold-eth/RainbowKitCustomConnectButton";
 
 export type LandClickType = (arg1: number, arg2: number) => void;
@@ -26,7 +27,7 @@ const Lands: NextPage = () => {
   return (
     <>
       <MetaHeader
-        title="CryptoForest | Lands"
+        title="Forest | Lands"
         description=""
       />
 
@@ -48,28 +49,29 @@ const Lands: NextPage = () => {
             </g>
 
           </svg>
-
-
         </div>
 
-        <div
-          className="card bg-base-200 shadow-xl fixed w-[360px] pointer-events-none right-16 top-16 bottom-8 p-8">
-          <b className="text-white">
-            {"Loction : "}({localMousePos.x}, {localMousePos.y})
-          </b>
+        <div>
+          <div className="navbar-end flex-grow fixed w-[360px] top-4 right-16">
+            <RainbowKitCustomConnectButton />
+          </div>
+          <div
+            className="card bg-base-200 shadow-xl fixed w-[360px] pointer-events-none right-16 top-16 bottom-8 p-8">
+            <b className="text-white">
+              {"Loction : "}({localMousePos.x}, {localMousePos.y})
+            </b>
 
-          <div className="bg-base-100 shadow-xl mt-4">
-            <div className="card-body">
-              <h2 className="card-title">No.1 🌲</h2>
-              <p>If a dog chews shoes whose shoes does he choose?</p>
-              <div className="card-actions justify-end">
-                <button className="btn btn-primary">Buy Now</button>
+            <div className="bg-base-100 shadow-xl mt-4">
+              <div className="card-body">
+                <h2 className="card-title">No.1 🌲</h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div className="card-actions justify-end">
+                  <button className="btn btn-primary">Buy Now</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-
       </div>
     </>
   );

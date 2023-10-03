@@ -43,9 +43,13 @@ export function gridBoxColor(callback:LandClickType) {
     for (let x = 0; x < 100; x++) {
         for (let y = 0; y < 100; y++) {
             const blueReducedHue = (x / (100 - 1)) * 60; // 0 到 60 范围的色相值
-            const h = 120 + blueReducedHue; // 在
-            // const h = (x / 110-1) * 360;  
-            const saturation = 41;
+            // const h = 120 + blueReducedHue; // 在
+            // // const h = (x / 110-1) * 360;  
+            // const saturation = 41;
+            // const lightness = 40;
+
+            const h = 163;
+            const saturation = 8;
             const lightness = 40;
             colors.push(
                 <rect onClick={(event)=>callback(x,y)}

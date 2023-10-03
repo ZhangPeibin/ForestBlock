@@ -38,7 +38,6 @@ const ScaffoldEthApp = ({ Component, pageProps }: AppProps) => {
       <WagmiConfig config={wagmiConfig}>
         <NextNProgress />
         <RainbowKitProvider chains={appChains.chains} avatar={BlockieAvatar}>
-          <Header />
           <div className="flex flex-col min-h-screen">
             <main className="relative flex flex-col flex-1">
               <Component {...pageProps} />
