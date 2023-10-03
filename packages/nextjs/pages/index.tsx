@@ -1,159 +1,78 @@
 import type { NextPage } from "next";
-import { useFrame, useThree } from "@react-three/fiber";
-import * as THREE from 'three'
-import { useMemo, useRef, useState } from "react";
-import CameraControls from 'camera-controls';
-import { useContractRead } from "wagmi";
-import { useDeployedContractInfo, useNetworkColor } from "~~/hooks/scaffold-eth";
-import { getContractNames } from "~~/utils/scaffold-eth/contractNames";
-import { notification } from "~~/utils/scaffold-eth";
-import { Abi } from "viem";
-import { HOW_TO_PLAY } from "~~/generated/constans";
+import { useState } from "react";
+import { Header } from "~~/components/Header";
+import { MetaHeader } from "~~/components/MetaHeader";
+import { gridLines, gridBoxColor, getTranslateY } from "~~/components/PaintLand";
+import { RainbowKitCustomConnectButton } from "~~/components/scaffold-eth/RainbowKitCustomConnectButton";
 
-CameraControls.install({ THREE })
+export type LandClickType = (arg1: number, arg2: number) => void;
 
-function Controls({ pos = new THREE.Vector3(0, 0, 0), look = new THREE.Vector3(0, 0, 0) }) {
-  const camera = useThree((state) => state.camera)
-  const gl = useThree((state) => state.gl)
-  const controls = useMemo(() => new CameraControls(camera, gl.domElement), [camera, gl])
-  return useFrame((state, delta) => {
-    controls.setLookAt(state.camera.position.x, state.camera.position.y, state.camera.position.z, 0, 0, -2, true)
-    return controls.update(delta)
-  })
-}
+const Lands: NextPage = () => {
 
-const MyGrid = () => {
-  const ref = useRef<any>(null)
+  const [localMousePos, setLocalMousePos] = useState({ x: 0, y: 0 });
 
-  useFrame(() => {
-    if (ref.current) {
-      // rotating the object
-      ref.current.rotation.y += 0.008;
-    }
-  });
-  return (
-    <gridHelper ref={ref} rotation={[0, 0, 0]} args={[5, 24, 0x444444, 0x444444]} >
-      { /* 0x535353  0x4c443b  0x626c70 */}
-    </gridHelper>
-  );
-}
+  const landClick: LandClickType = (x: number, y: number) => {
+    setLocalMousePos({ x, y })
+  }
 
-const Home: NextPage = () => {
+  const svgEles = [];
+  svgEles.push(gridLines())
+  svgEles.push(gridBoxColor(landClick))
 
-  const [zoom, setZoom] = useState(false)
-  const contractNames = getContractNames();
-  const { data: deployedContractData, isLoading: deployedContractLoading } = useDeployedContractInfo(contractNames[0]);
-  console.log(deployedContractData);
-  const {
-    data: result,
-    isFetching,
-    refetch,
-  } = useContractRead({
-    address: deployedContractData?.address,
-    functionName: "getAllSpecs",
-    abi: deployedContractData?.abi as Abi,
-    onError: error => {
-      notification.error(error.message);
-    },
-  });
-
-  const {
-    data: items
-  } = useContractRead({
-    address: deployedContractData?.address,
-    functionName: "getAllItems",
-    abi: deployedContractData?.abi as Abi,
-    onError: error => {
-      notification.error(error.message);
-    },
-  });
-
-
+  svgEles.push(
+    <image x="10.25" y={10.25 + getTranslateY()} href="https://pic1.zhimg.com/v2-8e3abe6a02e63d96d0e8f341537300d4_b.webp" width="9.5" height="9.5" preserveAspectRatio="xMinYMin slice" opacity={1}></image>
+  )
 
   return (
-    <div className="w-screen h-full flex-col">
-      <section>
-        <div className="px-5" >
-          <h1 className="text-center  ">
-            <span className="block text-4xl mb-2">Welcome to 🌴🌳🌲</span>
-          </h1>
-          <p className="text-center text-3xl">
-            Plant a digital tree in the blockchain
-            <br />
-            own a tree in the real world
-          </p>
+    <>
+      <MetaHeader
+        title="CryptoForest | Lands"
+        description=""
+      />
+
+      <div className="bg-base-300 w-screen h-screen block relative ">
+
+        <div
+          data-zoom-on-wheel="zoom-amount: 0.01; min-scale: 0.5; max-scale: 100;"
+          data-pan-on-drag="true">
+          <svg xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            id="grid"
+          >
+            <g id="viewport"
+              transform="matrix(0.571830985915493,0,0,0.571830985915493,104.0845070422535,0)"
+              className="svg-pan-zoom_viewport"
+            >
+              {svgEles}
+              <text x="0" y="20" fill="green">Verdantia land </text>
+            </g>
+
+          </svg>
+
+
         </div>
 
-      </section>
+        <div
+          className="card bg-base-200 shadow-xl fixed w-[360px] pointer-events-none right-16 top-16 bottom-8 p-8">
+          <b className="text-white">
+            {"Loction : "}({localMousePos.x}, {localMousePos.y})
+          </b>
 
-      <section>
-        <div className="flex flex-row ">
-          <div className="flex-1 pl-4 pr-4 pb-4 ml-16 mr-16 mb-8 card bg-base-200  w-[360px] pointer-events-none ">
-            <div className="hero">
-              <div className="hero-content flex-col lg:flex-row">
-                <div>
-                  <span className="card-title">What is CryptoForest</span>
-                  <p >
-                    CryptoForest leads innovative full-chain green and low-carbon projects. We transform the on-chain transaction behavior into valuable forest energy to nourish the ever-growing blockchain virtual tree.
-                    In the crypto forest, every transaction is a sowing, and every attention is a watering.
-                    <br />
-                    When the virtual tree matures, you will receive a valuable tree-planting certificate and contribute a corresponding real tree to real-world ecology.</p>
-
-                  <div className="divider">Or</div>
-
-                  <span className="card-title">How to play </span>
-                  <p />
-                  <ul className="list-decimal ml-4">
-
-                    {HOW_TO_PLAY.map((item: any) => (
-                      <li key={item} >
-                        <p>{item}</p>
-                      </li>
-                    ))}
-                  </ul>
-
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div>
-            <div
-              className="mr-16 card bg-base-200 w-[360px]">
-              <div className="smt-4">
-                <div className="card-body">
-                  <h2 className="card-title">🌲 Forest species</h2>
-                  {(result as Array<string>)?.map((item: any, index) => (
-                    <h2 key={item['id']} className="link">
-                      <a target="_blank" rel="noreferrer" href={item['wikiUrl']}>{item['name']}</a>
-                    </h2>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div
-              className="mt-8 mb-16  mr-16 card bg-base-200  w-[360px] pointer-events-none ">
-              <div className="smt-4">
-                <div className="card-body">
-                  <h2 className="card-title">🔨 Forest Items</h2>
-                  {(items as Array<string>)?.map((item: any, index) => (
-                    <h2 key={item['id']}>
-                      <a>{item['name']}  Item </a>
-                    </h2>
-                  ))}
-                </div>
+          <div className="bg-base-100 shadow-xl mt-4">
+            <div className="card-body">
+              <h2 className="card-title">No.1 🌲</h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div className="card-actions justify-end">
+                <button className="btn btn-primary">Buy Now</button>
               </div>
             </div>
           </div>
         </div>
-      </section>
 
-    </div>
 
+      </div>
+    </>
   );
 };
 
-export default Home;
-
+export default Lands;

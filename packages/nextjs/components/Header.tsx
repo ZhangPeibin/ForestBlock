@@ -35,31 +35,30 @@ export const Header = () => {
     burgerMenuRef,
     useCallback(() => setIsDrawerOpen(false), []),
   );
-  console.log()
   const navLinks = (
     <>
 
-      {
+      {/* {
         router.pathname == "/" &&
         <li>
           <NavLink href="/lands">
             -{">"} Lands
           </NavLink>
         </li>
-      }
+      } */}
 
-      {
+      {/* {
         router.pathname == "/lands" &&
         <li>
           <NavLink href="/"> -{">"} Home </NavLink>
         </li>
-      }
+      } */}
 
-      <li>
+      {/* <li>
         <NavLink href="/debug">
           Debug Contracts
         </NavLink>
-      </li>
+      </li> */}
     </>
   );
 
@@ -89,10 +88,10 @@ export const Header = () => {
           )}
         </div>
         <div className="hidden lg:flex items-center gap-2 ml-4 mr-6" />
-        <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2">{navLinks}</ul>
+        <ul className="hidden lg:flex lg:flex-nowrap menu menu-horizontal px-1 gap-2 ">{navLinks}</ul>
 
       </div>
-      <div className="navbar-end flex-grow mr-4">
+      <div className="navbar-end flex-grow mr-4 mt-2">
         <RainbowKitCustomConnectButton />
         <FaucetButton />
       </div>
