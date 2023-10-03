@@ -51,12 +51,11 @@ const Lands: NextPage = () => {
           </svg>
         </div>
 
-        <div>
-          <div className="navbar-end flex-grow fixed w-[360px] top-4 right-16">
+        <div
+            className="card bg-base-200 shadow-xl fixed w-[360px] right-4 top-4 bottom-4 p-4 overflow-y-auto">
+            
             <RainbowKitCustomConnectButton />
-          </div>
-          <div
-            className="card bg-base-200 shadow-xl fixed w-[360px] pointer-events-none right-16 top-16 bottom-8 p-8">
+
             <b className="text-white">
               {"Loction : "}({localMousePos.x}, {localMousePos.y})
             </b>
@@ -70,8 +69,28 @@ const Lands: NextPage = () => {
                 </div>
               </div>
             </div>
+
+            <div className="bg-base-100 shadow-xl mt-4">
+              <div className="card-body">
+                <h2 className="card-title">No.1 🌲</h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div className="card-actions justify-end">
+                  <button className="btn btn-primary">Buy Now</button>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-base-100 shadow-xl mt-4">
+              <div className="card-body">
+                <h2 className="card-title">No.1 🌲</h2>
+                <p>If a dog chews shoes whose shoes does he choose?</p>
+                <div className="card-actions justify-end">
+                  <button className="btn btn-primary">Buy Now</button>
+                </div>
+              </div>
+            </div>
+            
           </div>
-        </div>
       </div>
     </>
   );
